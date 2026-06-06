@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนการศึกษา — Nunthawat BME Roadmap</title>
+<style>
+:root {
+  --bg: #0f0f13;
+  --bg2: #16161d;
+  --bg3: #1e1e28;
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.14);
+  --text: #e8e8f0;
+  --text2: #9090a8;
+  --text3: #5a5a72;
+  --accent: #7c6ff7;
+  --accent2: #5b53d4;
+  --jp: #f59e42;
+  --kr: #f06060;
+  --eu: #4caf80;
+  --us: #5ba4cf;
+  --cn: #e05050;
+  --th: #b07be8;
+  --mu: #4da6ff;
+  --tw: #38bdf8;
+  --sg: #a3e635;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.6; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,19,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; gap: 0; height: 52px; }
+.nav-brand { font-weight: 700; font-size: 14px; color: var(--accent); margin-right: 2rem; white-space: nowrap; }
+.nav-tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab { padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--text2); border: none; background: none; white-space: nowrap; transition: all 0.15s; }
+.nav-tab:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-tab.active { color: #fff; background: rgba(124,111,247,0.2); }
+
+/* HERO */
+.hero { padding: 3rem 2rem 2rem; max-width: 900px; margin: 0 auto; }
+.hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.hero p { color: var(--text2); max-width: 600px; }
+.tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.tag { font-size: 12px; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text2); }
+
+/* LAYOUT */
+.page { display: none; max-width: 900px; margin: 0 auto; padding: 2rem; }
+.page.active { display: block; }
+
+/* CASE CARDS */
+.case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 2rem; }
+.case-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; cursor: pointer; transition: all 0.2s; }
+.case-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.case-card.active { border-color: var(--accent); background: rgba(124,111,247,0.08); }
+.case-number { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.case-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.case-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.case-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: rgba(124,111,247,0.15); color: var(--accent); }
+
+/* COUNTRY SELECTOR */
+.country-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.country-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); font-size: 13px; cursor: pointer; transition: all 0.15s; }
+.country-btn:hover { border-color: var(--border2); color: var(--text); }
+.country-btn.active { color: #fff; }
+.country-btn[data-c="jp"].active { border-color: var(--jp); background: rgba(245,158,66,0.12); color: var(--jp); }
+.country-btn[data-c="kr"].active { border-color: var(--kr); background: rgba(240,96,96,0.12); color: var(--kr); }
+.country-btn[data-c="eu"].active { border-color: var(--eu); background: rgba(76,175,128,0.12); color: var(--eu); }
+.country-btn[data-c="us"].active { border-color: var(--us); background: rgba(91,164,207,0.12); color: var(--us); }
+.country-btn[data-c="cn"].active { border-color: var(--cn); background: rgba(224,80,80,0.12); color: var(--cn); }
+.country-btn[data-c="tw"].active { border-color: var(--tw); background: rgba(56,189,248,0.12); color: var(--tw); }
+
+/* CONTENT PANELS */
+.cpanel { display: none; }
+.cpanel.active { display: block; }
+
+/* SECTION */
+.section { margin-bottom: 2rem; }
+.section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 20px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border2); }
+.tl-item { position: relative; margin-bottom: 1.25rem; }
+.tl-item::before { content: ''; position: absolute; left: -24px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--border2); }
+.tl-item.hot::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px rgba(124,111,247,0.5); }
+.tl-date { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+.tl-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.tl-detail { font-size: 13px; color: var(--text2); line-height: 1.55; }
+.tl-steps { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.tl-step { font-size: 12px; color: var(--text2); display: flex; gap: 8px; }
+.tl-step-num { min-width: 18px; height: 18px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text3); flex-shrink: 0; margin-top: 1px; }
+.tl-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tl-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text3); }
+.tl-tag.warn { border-color: rgba(245,158,66,0.4); color: #f59e42; background: rgba(245,158,66,0.08); }
+.tl-tag.ok { border-color: rgba(76,175,128,0.4); color: #4caf80; background: rgba(76,175,128,0.08); }
+.tl-tag.info { border-color: rgba(91,164,207,0.4); color: #5ba4cf; background: rgba(91,164,207,0.08); }
+.tl-tag.accent { border-color: rgba(124,111,247,0.4); color: var(--accent); background: rgba(124,111,247,0.08); }
+
+/* REQ BOX */
+.req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.req-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+.req-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+.req-value { font-size: 14px; font-weight: 600; color: var(--text); }
+.req-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* UNI TABLE */
+.uni-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 13px; }
+.uni-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); border-bottom: 1px solid var(--border); }
+.uni-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.uni-table td:first-child { color: var(--text); font-weight: 500; }
+.uni-table tr:last-child td { border-bottom: none; }
+.uni-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* NOTE */
+.note { background: rgba(124,111,247,0.07); border: 1px solid rgba(124,111,247,0.2); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 1.5rem; }
+.note strong { color: var(--text); }
+.warn-note { background: rgba(245,158,66,0.07); border-color: rgba(245,158,66,0.25); }
+.success-note { background: rgba(76,175,128,0.07); border-color: rgba(76,175,128,0.25); }
+
+/* ALT PATHS */
+.alt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.alt-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+.alt-icon { font-size: 20px; margin-bottom: 8px; }
+.alt-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.alt-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+.alt-pros { margin-top: 10px; font-size: 12px; color: #4caf80; }
+.alt-cons { font-size: 12px; color: #f06060; margin-top: 2px; }
+
+/* COMPARE */
+.compare-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+.compare-row { display: grid; grid-template-columns: 100px 1fr 60px; gap: 8px; align-items: center; font-size: 13px; }
+.compare-label { color: var(--text2); }
+.compare-track { background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; }
+.compare-fill { height: 100%; border-radius: 4px; }
+.compare-score { text-align: right; font-weight: 600; font-size: 12px; }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--text3); font-size: 12px; max-width: 900px; margin: 3rem auto 0; }
+
+/* LINKS */
+a.ext { color: var(--accent); text-decoration: none; border-bottom: 1px dotted rgba(124,111,247,0.4); transition: all 0.15s; }
+a.ext:hover { color: #a89fff; border-bottom-color: var(--accent); }
+
+/* LINK PORTAL GRID */
+.portal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.portal-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; transition: border-color 0.15s; }
+.portal-card:hover { border-color: var(--border2); }
+.portal-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
+.portal-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.portal-link { font-size: 12px; }
+
+/* GPA STATUS */
+.gpa-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.gpa-ok { background: rgba(76,175,128,0.12); color: #4caf80; border: 1px solid rgba(76,175,128,0.3); }
+.gpa-warn { background: rgba(245,158,66,0.12); color: #f59e42; border: 1px solid rgba(245,158,66,0.3); }
+.gpa-no { background: rgba(240,96,96,0.12); color: #f06060; border: 1px solid rgba(240,96,96,0.3); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">🎯 BME Roadmap</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('overview')">ภาพรวม</button>
+    <button class="nav-tab" onclick="showPage('case1')">เคส 1: ทุนต่างประเทศ</button>
+    <button class="nav-tab" onclick="showPage('case2')">เคส 2: BME ไทย</button>
+    <button class="nav-tab" onclick="showPage('case3')">เคส 3: จบ ICT ก่อน</button>
+    <button class="nav-tab" onclick="showPage('alt')">ทางเลือกอื่นๆ</button>
+    <button class="nav-tab" onclick="showPage('compare')">เปรียบเทียบ</button>
+    <button class="nav-tab" onclick="showPage('afterbme')" style="color:#f59e42;">🚀 หลังจบ BME</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     OVERVIEW
+════════════════════════════════════════════ -->
+<div id="page-overview" class="page active">
+  <div class="hero" style="padding-left:0;padding-right:0;">
+    <h1>แผนการศึกษา BME — Nunthawat</h1>
+    <p>นักศึกษา DST ปี 1 มหิดล ICT (2569) · เป้าหมาย: Biomedical Engineering · อายุ 18 ปี 7 ก.ค. 2569</p>
+    <div class="tags">
+      <span class="tag">🎓 B.Sc. DST — ICT Mahidol</span>
+      <span class="tag">📅 เริ่ม ส.ค. 2569</span>
+      <span class="tag">🏆 TOEIC 755 (Group 4)</span>
+      <span class="tag">🌏 เป้า: BME Abroad</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">3 เคสหลัก</div>
+    <div class="case-grid">
+      <div class="case-card" onclick="showPage('case1')">
+        <div class="case-number">เคส 1</div>
+        <div class="case-title">🌏 ได้ทุนต่างประเทศ</div>
+        <div class="case-desc">สมัครทุนรัฐบาล / มหาวิทยาลัยต่างประเทศ ออกจาก ICT เพื่อเรียน BME ต่างประเทศโดยตรง</div>
+        <span class="case-badge">5 ประเทศ · ลำดับความสำคัญ</span>
+      </div>
+      <div class="case-card" onclick="showPage('case2')">
+        <div class="case-number">เคส 2</div>
+        <div class="case-title">🇹🇭 BME ในไทย</div>
+        <div class="case-desc">สอบ A-Level / TCAS70 ขณะเรียน ICT ปี 1 ย้ายสาขา BME ในไทย (จุฬา / มหิดล / KMITL)</div>
+        <span class="case-badge">TCAS70 · ไม่ต้องลาออกก่อนสมัคร</span>
+      </div>
+      <div class="case-card" onclick="showPage('case3')">
+        <div class="case-number">เคส 3</div>
+        <div class="case-title">🎓 จบ ICT ก่อน → BME ทีหลัง</div>
+        <div class="case-desc">เรียน ICT 4 ปีจนจบ แล้วต่อ Master's BME ในหรือต่างประเทศ หรือ Second Bachelor's</div>
+        <span class="case-badge">ปลอดภัยที่สุด · Double Degree</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">สรุป Timeline ทั้งหมด</div>
+    <div class="timeline">
+      <div class="tl-item hot">
+        <div class="tl-date">มิ.ย.–ก.ค. 2569 (ตอนนี้)</div>
+        <div class="tl-title">Prep Program ICT Mahidol</div>
+        <div class="tl-detail">29 มิ.ย. – 24 ก.ค. 2569 · เรียน Math / CS / English Group C (Om)</div>
+        <div class="tl-tags"><span class="tl-tag ok">กำลังดำเนินการ</span><span class="tl-tag info">Credit Transfer ศศภอ 124 ยื่น 1–17 ก.ค.</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">ส.ค. 2569</div>
+        <div class="tl-title">เปิดเทอม ICT ปี 1</div>
+        <div class="tl-detail">เริ่มเรียน DST · เป้า GPA 3.5+ · เริ่มเตรียม IELTS คู่ขนาน</div>
+      </div>
+      <div class="tl-item hot">
+        <div class="tl-date">ก.ย.–ต.ค. 2569</div>
+        <div class="tl-title">⚡ KAIST Early Admission เปิดรับ (เคส 1-เกาหลี)</div>
+        <div class="tl-detail">22 ก.ย. – 22 ต.ค. 2569 · Spring 2027 Track · ผล 7 ม.ค. 2570</div>
+        <div class="tl-tags"><span class="tl-tag accent">เร็วที่สุด — ภายใน 4 เดือน!</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">พ.ย. 2569</div>
+        <div class="tl-title">สมัครสอบ TGAT/TPAT (เคส 2)</div>
+        <div class="tl-detail">4–10 พ.ย. 2569 · สำหรับ TCAS70 BME ในไทย</div>
+      </div>
+      <div class="tl-item hot">
+        <div class="tl-date">ม.ค. 2570</div>
+        <div class="tl-title">⚡ ผล KAIST Early + สมัคร A-Level</div>
+        <div class="tl-detail">7 ม.ค.: ผล KAIST Early · 14–20 ม.ค.: สมัครสอบ A-Level</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">ก.พ.–มี.ค. 2570</div>
+        <div class="tl-title">สมัคร GKS Embassy + สอบ A-Level</div>
+        <div class="tl-detail">GKS deadline ~ก.พ. · A-Level: 13–15 มี.ค. 2570</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">พ.ค.–มิ.ย. 2570</div>
+        <div class="tl-title">ผล TCAS รอบ 3 + ผล GKS</div>
+        <div class="tl-detail">22 พ.ค.: ประกาศ TCAS รอบ 3 · เม.ย.–มิ.ย.: ผล GKS</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">มิ.ย. 2570</div>
+        <div class="tl-title">⚡ Deadline MEXT Embassy</div>
+        <div class="tl-detail">~ต้น มิ.ย. ทุกปี · สอบข้อเขียน ปลาย มิ.ย. · สัมภาษณ์ ปลาย ก.ค.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">ส.ค. 2570 – ปัจจุบัน</div>
+        <div class="tl-title">เริ่มเรียน BME หรือ ICT ปี 2 ต่อ</div>
+        <div class="tl-detail">ขึ้นอยู่กับผลทุน / TCAS · ถ้าไม่ได้ทั้งคู่ = เรียน ICT ปี 2 ต่อ แล้วลองใหม่รอบถัดไป</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">สิ่งที่ต้องทำในทุกเคส</div>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-label">IELTS เป้าหมาย</div>
+        <div class="req-value">7.0+</div>
+        <div class="req-sub">ยุโรป / เกาหลี / ญี่ปุ่น (บางที่)</div>
+      </div>
+      <div class="req-card">
+        <div class="req-label">GPA ม.ปลาย (ของเรา)</div>
+        <div class="req-value">3.37</div>
+        <div class="req-sub">GKS/CSC/เยอรมนี ✅ · MEXT ต้องได้ JLPT N2 ⚠️ · USA ต้องชดเชยด้วย SAT ⚠️</div>
+      </div>
+      <div class="req-card">
+        <div class="req-label">A-Level (เคส 2)</div>
+        <div class="req-value">ฟิสิกส์ + เคมี + ชีว + คณิต 1</div>
+        <div class="req-sub">สมัคร ม.ค. 2570 สอบ มี.ค. 2570</div>
+      </div>
+      <div class="req-card">
+        <div class="req-label">SAT (USA)</div>
+        <div class="req-value">1400+</div>
+        <div class="req-sub">ACT 32+ ก็ยอมรับ</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     CASE 1: SCHOLARSHIP ABROAD
+════════════════════════════════════════════ -->
+<div id="page-case1" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">🌏 เคส 1: ได้ทุนต่างประเทศ → เรียน BME</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;">สมัครทุนต่างประเทศขณะเรียน ICT ปี 1–2 · ไม่ต้องลาออกก่อนสมัคร · ลาออกหลังยืนยันสิทธิ์</p>
+
+  <div class="country-bar">
+    <button class="country-btn active" data-c="jp" onclick="showCountry('jp')">🇯🇵 MEXT ญี่ปุ่น</button>
+    <button class="country-btn" data-c="kr" onclick="showCountry('kr')">🇰🇷 GKS + KAIST เกาหลี</button>
+    <button class="country-btn" data-c="eu" onclick="showCountry('eu')">🇪🇺 ยุโรป</button>
+    <button class="country-btn" data-c="us" onclick="showCountry('us')">🇺🇸 USA</button>
+    <button class="country-btn" data-c="cn" onclick="showCountry('cn')">🇨🇳 จีน CSC</button>
+    <button class="country-btn" data-c="tw" onclick="showCountry('tw')">🇹🇼 Taiwan + Asia</button>
+  </div>
+
+  <!-- JAPAN -->
+  <div id="cp-jp" class="cpanel active">
+    <div class="note success-note">📋 <strong>ทุน MEXT Undergrad:</strong> ค่าเทอมฟรี + ¥117,000/เดือน + ตั๋วเครื่องบิน ระยะเวลา 5–6 ปี (รวมเรียนภาษา 1 ปี)</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Application Portals</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">ทุน MEXT (สถานทูตญี่ปุ่น ไทย)</div><div class="portal-name">th.emb-japan.go.jp</div><div class="portal-link"><a class="ext" href="https://www.th.emb-japan.go.jp/itprtop_th/index.html" target="_blank">→ เว็บสถานทูต</a></div></div>
+        <div class="portal-card"><div class="portal-label">Study in Japan (ทางการ)</div><div class="portal-name">studyinjapan.go.jp</div><div class="portal-link"><a class="ext" href="https://www.studyinjapan.go.jp/en/" target="_blank">→ ข้อมูลทุน MEXT</a></div></div>
+        <div class="portal-card"><div class="portal-label">University of Tokyo</div><div class="portal-name">u-tokyo.ac.jp</div><div class="portal-link"><a class="ext" href="https://www.u-tokyo.ac.jp/en/" target="_blank">→ เว็บ UTokyo</a></div></div>
+        <div class="portal-card"><div class="portal-label">Tohoku University</div><div class="portal-name">tohoku.ac.jp</div><div class="portal-link"><a class="ext" href="https://www.tohoku.ac.jp/en/" target="_blank">→ เว็บ Tohoku</a></div></div>
+        <div class="portal-card"><div class="portal-label">Osaka University</div><div class="portal-name">osaka-u.ac.jp</div><div class="portal-link"><a class="ext" href="https://www.osaka-u.ac.jp/en/" target="_blank">→ เว็บ Osaka U</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Requirements <span style="margin-left:8px;" class="gpa-warn">⚠️ GPA 3.37 → ต้องได้ JLPT N2 ถึงผ่านเกณฑ์</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">GPA</div><div class="req-value">≥ 3.50</div><div class="req-sub">หรือ <strong>≥ 3.30 + JLPT N1/N2</strong> → 3.37 ✅ ถ้ามี JLPT N2</div></div>
+        <div class="req-card"><div class="req-label">JLPT</div><div class="req-value">N3–N2</div><div class="req-sub">ยิ่งสูงยิ่งดี · มีจะได้เปรียบ</div></div>
+        <div class="req-card"><div class="req-label">อายุ</div><div class="req-value">≤ 25 ปี</div><div class="req-sub">ณ วันสมัคร · ปัจจุบัน 17 ปี ✅</div></div>
+        <div class="req-card"><div class="req-label">สัญชาติ</div><div class="req-value">ไทย</div><div class="req-sub">ไม่ถือสัญชาติญี่ปุ่น ✅</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">มหาวิทยาลัยเป้าหมาย BME</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>สาขา</th><th>ระดับ</th><th>หมายเหตุ</th></tr>
+        <tr><td><a class="ext" href="https://www.u-tokyo.ac.jp/en/" target="_blank">University of Tokyo</a></td><td>Dept. of Bioengineering</td><td>ยากมาก</td><td>อันดับ 1 เอเชีย</td></tr>
+        <tr><td><a class="ext" href="https://www.osaka-u.ac.jp/en/" target="_blank">Osaka University</a></td><td>Biomedical Engineering</td><td>ยาก</td><td>วิจัยแข็งแกร่ง</td></tr>
+        <tr><td><a class="ext" href="https://www.tohoku.ac.jp/en/" target="_blank">Tohoku University</a></td><td>Biomedical Engineering</td><td>ปานกลาง</td><td>MEXT เยอะ แนะนำ ⭐</td></tr>
+        <tr><td><a class="ext" href="https://www.kyoto-u.ac.jp/en" target="_blank">Kyoto University</a></td><td>Medical Engineering</td><td>ยากมาก</td><td>ชื่อดังระดับโลก</td></tr>
+        <tr><td><a class="ext" href="https://www.nagoya-u.ac.jp/en/" target="_blank">Nagoya University</a></td><td>Biomedical Engineering</td><td>ปานกลาง</td><td>Competition น้อยกว่า</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">ส.ค. 2569 – ม.ค. 2570</div><div class="tl-title">เริ่ม ICT ปี 1 + เรียนภาษาญี่ปุ่น N5→N4</div><div class="tl-detail">เป้า GPA ≥ 3.50 ทุกวิชา · เรียน JLPT app เช่น WaniKani, Duolingo Japanese ทุกวัน</div></div>
+        <div class="tl-item"><div class="tl-date">เม.ย.–พ.ค. 2570</div><div class="tl-title">สถานทูตญี่ปุ่นเปิดรับสมัคร MEXT</div><div class="tl-detail">ติดตามเว็บ th.emb-japan.go.jp ทุกวัน · เตรียมเอกสารให้พร้อมก่อน</div></div>
+        <div class="tl-item hot"><div class="tl-date">~ต้น มิ.ย. 2570</div><div class="tl-title">⚡ Deadline ส่งเอกสาร MEXT ทางไปรษณีย์</div><div class="tl-detail">ปี 2025 deadline: 4 มิ.ย. · ส่งถึงสถานทูตก่อน deadline (ไม่นับวันประทับตรา)</div>
+          <div class="tl-steps">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>Application Form + Admission Form (กรอกด้วยมือ/พิมพ์)</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>Transcript ม.ปลาย Official + Transcript ICT ปี 1 Official</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>Certificate of Enrollment จาก ICT (ไม่ต้องลาออก)</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>คะแนน JLPT / TOEFL / IELTS (ถ้ามี)</span></div>
+            <div class="tl-step"><div class="tl-step-num">5</div><span>รูปถ่าย 4×3 ซม.</span></div>
+          </div>
+          <div class="tl-tags"><span class="tl-tag warn">ส่งทางไปรษณีย์เท่านั้น · Walk-in ไม่รับ</span></div>
+        </div>
+        <div class="tl-item"><div class="tl-date">20 มิ.ย. 2570</div><div class="tl-title">ประกาศรายชื่อผู้มีสิทธิ์สอบข้อเขียน</div><div class="tl-detail">เช็กเว็บสถานทูต 15:00 น.</div></div>
+        <div class="tl-item hot"><div class="tl-date">~29 มิ.ย. 2570</div><div class="tl-title">⚡ สอบข้อเขียน MEXT</div><div class="tl-detail">English + Math + Physics + Chemistry (Natural Sciences B/C) · ศูนย์สอบ Bangkok / CM / Khon Kaen / Songkhla</div></div>
+        <div class="tl-item"><div class="tl-date">17 ก.ค. 2570</div><div class="tl-title">ประกาศผลสอบข้อเขียน</div></div>
+        <div class="tl-item"><div class="tl-date">23–24 ก.ค. 2570</div><div class="tl-title">สัมภาษณ์ที่สถานทูตญี่ปุ่น กรุงเทพ</div><div class="tl-detail">อังกฤษ ± ภาษาญี่ปุ่น (ถ้ามี)</div></div>
+        <div class="tl-item"><div class="tl-date">30 ก.ค. 2570</div><div class="tl-title">ประกาศผล Embassy Recommendation</div><div class="tl-detail">Embassy ส่งชื่อให้ MEXT ตัดสินขั้นสุดท้าย ผลมาปลายปี</div></div>
+        <div class="tl-item"><div class="tl-date">ส.ค.–ธ.ค. 2570</div><div class="tl-title">รอผลจาก MEXT Tokyo + เรียน ICT ปี 2 ต่อปกติ</div><div class="tl-detail">ถ้าผ่าน: ยื่นลาออก ICT · เตรียมวีซ่า · จองที่พักในญี่ปุ่น</div></div>
+        <div class="tl-item"><div class="tl-date">เม.ย. 2571</div><div class="tl-title">เดินทางไปญี่ปุ่น — เรียนภาษา 1 ปีก่อน</div><div class="tl-detail">เม.ย. 2572 เริ่มเรียน BME จริง · จบประมาณ 2576–2577</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KOREA -->
+  <div id="cp-kr" class="cpanel">
+    <div class="note success-note">📋 <strong>GKS:</strong> ค่าเทอม + ₩900,000/เดือน + ตั๋ว | <strong>KAIST Scholarship:</strong> ค่าเทอมฟรี + ₩350,000/เดือน + หอพัก</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Application Portals</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">KAIST Admissions (Int'l)</div><div class="portal-name">admission.kaist.ac.kr</div><div class="portal-link"><a class="ext" href="https://admission.kaist.ac.kr/intl-undergraduate/" target="_blank">→ Int'l Undergrad Info</a></div></div>
+        <div class="portal-card"><div class="portal-label">KAIST Apply Online</div><div class="portal-name">univapply.kaist.ac.kr</div><div class="portal-link"><a class="ext" href="https://univapply.kaist.ac.kr/interapply/" target="_blank">→ สมัครที่นี่</a></div></div>
+        <div class="portal-card"><div class="portal-label">GKS / Study in Korea</div><div class="portal-name">studyinkorea.go.kr</div><div class="portal-link"><a class="ext" href="https://www.studyinkorea.go.kr/en/sub/gks/allnew_invite.do" target="_blank">→ สมัคร GKS</a></div></div>
+        <div class="portal-card"><div class="portal-label">Yonsei University</div><div class="portal-name">yonsei.ac.kr</div><div class="portal-link"><a class="ext" href="https://www.yonsei.ac.kr/en_sc/" target="_blank">→ เว็บ Yonsei</a></div></div>
+        <div class="portal-card"><div class="portal-label">Korea University</div><div class="portal-name">korea.edu</div><div class="portal-link"><a class="ext" href="https://www.korea.edu/" target="_blank">→ เว็บ KU</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Requirements <span style="margin-left:8px;" class="gpa-ok">✅ GPA 3.37 ผ่านเกณฑ์ GKS (≥3.0)</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">TOEFL / IELTS</div><div class="req-value">83+ / 6.5+</div><div class="req-sub">KAIST บังคับ · GKS แนะนำ</div></div>
+        <div class="req-card"><div class="req-label">GPA</div><div class="req-value">≥ 3.0</div><div class="req-sub">3.37 ✅ ผ่านแล้ว · ยิ่งสูงยิ่งดี</div></div>
+        <div class="req-card"><div class="req-label">LoR</div><div class="req-value">2 ฉบับ</div><div class="req-sub">อาจารย์ / ผู้บังคับบัญชา</div></div>
+        <div class="req-card"><div class="req-label">TOPIK</div><div class="req-value">ไม่บังคับ</div><div class="req-sub">KAIST = อังกฤษ 100%</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">มหาวิทยาลัยเป้าหมาย</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>สาขา</th><th>ภาษา</th><th>หมายเหตุ</th></tr>
+        <tr><td>🔬 <a class="ext" href="https://admission.kaist.ac.kr/intl-undergraduate/" target="_blank">KAIST</a></td><td>Bio & Brain Engineering</td><td>อังกฤษ 100%</td><td>แนะนำที่สุด ไม่ต้องเรียนเกาหลีก่อน ⭐</td></tr>
+        <tr><td><a class="ext" href="https://www.yonsei.ac.kr/en_sc/" target="_blank">Yonsei University</a></td><td>Biomedical Engineering</td><td>อังกฤษ/เกาหลี</td><td>SKY Uni · มีโปรแกรมอังกฤษ</td></tr>
+        <tr><td><a class="ext" href="https://www.korea.edu/" target="_blank">Korea University</a></td><td>Biomedical Engineering</td><td>อังกฤษ/เกาหลี</td><td>SKY Uni · ชื่อดัง</td></tr>
+        <tr><td><a class="ext" href="https://www.snu.ac.kr/index.html" target="_blank">SNU</a></td><td>Bioengineering</td><td>เกาหลีเป็นหลัก</td><td>อันดับ 1 เกาหลี · ยากมาก</td></tr>
+        <tr><td><a class="ext" href="https://www.postech.ac.kr/eng/" target="_blank">POSTECH</a></td><td>Life Science / Bioeng.</td><td>อังกฤษ/เกาหลี</td><td>เล็กแต่ research แข็งแกร่ง</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline — สมัคร 2 track พร้อมกัน</div>
+      <div class="timeline">
+        <div class="tl-item hot"><div class="tl-date">22 ก.ย. – 22 ต.ค. 2569</div><div class="tl-title">⚡ KAIST Early Admission เปิดรับ (Spring 2027)</div><div class="tl-detail">สมัครผ่าน univapply.kaist.ac.kr · ต้องมี TOEFL/IELTS score ก่อน deadline</div>
+          <div class="tl-steps">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>สมัคร online + จ่ายค่าสมัคร $100</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>ส่ง Transcript ม.ปลาย + ICT ปี 1 (อย่างเป็นทางการ)</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>Personal Statement (ทำไมถึงอยากเรียน KAIST / BME)</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>2 Letters of Recommendation</span></div>
+            <div class="tl-step"><div class="tl-step-num">5</div><span>TOEFL 83+ หรือ IELTS 6.5+ score report</span></div>
+          </div>
+          <div class="tl-tags"><span class="tl-tag accent">ไม่ต้องลาออก ICT · ยื่นพร้อมกันเลย</span></div>
+        </div>
+        <div class="tl-item"><div class="tl-date">29 ต.ค. 2569</div><div class="tl-title">Deadline ส่ง LoR (KAIST Early)</div></div>
+        <div class="tl-item"><div class="tl-date">22 ธ.ค. 2569</div><div class="tl-title">Online Interview (ถ้าถูกเรียก)</div><div class="tl-detail">ไม่ใช่ทุกคนที่ถูกเรียกสัมภาษณ์ · รอ email จาก KAIST</div></div>
+        <div class="tl-item hot"><div class="tl-date">7 ม.ค. 2570 – 10:00 KST</div><div class="tl-title">ประกาศผล KAIST Early Admission</div><div class="tl-detail">ถ้าผ่าน: ต้อง confirm ก่อน ก.พ. 2570 · เตรียมลาออก ICT</div><div class="tl-tags"><span class="tl-tag ok">เร็วที่สุด — เริ่มเรียน ก.พ. 2570!</span></div></div>
+        <div class="tl-item"><div class="tl-date">10 พ.ย. 2569 – 14 ม.ค. 2570</div><div class="tl-title">KAIST Regular Admission เปิดรับ (Fall 2027)</div><div class="tl-detail">สมัครคู่ขนานกับ GKS ได้เลย · ผล 25 มี.ค. 2570</div></div>
+        <div class="tl-item hot"><div class="tl-date">ก.พ.–มี.ค. 2570</div><div class="tl-title">⚡ สมัคร GKS Undergrad Embassy Track</div><div class="tl-detail">ผ่านสถานทูตเกาหลีในไทย · Deadline ~ปลาย ก.พ. 2570</div>
+          <div class="tl-steps">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>Register ที่ studyinkorea.go.kr</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>เลือกมหาวิทยาลัย 3 แห่ง (เรียงลำดับ)</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>Personal Statement + Study Plan</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>Transcript + LoR + ใบรับรองสุขภาพ</span></div>
+          </div>
+        </div>
+        <div class="tl-item"><div class="tl-date">มี.ค.–มิ.ย. 2570</div><div class="tl-title">สัมภาษณ์ GKS + ประกาศผล</div><div class="tl-detail">Embassy คัดเลือก → ส่งชื่อให้ NIIED Korea ตัดสินขั้นสุดท้าย</div></div>
+        <div class="tl-item"><div class="tl-date">ส.ค. 2570 หรือ มี.ค. 2571</div><div class="tl-title">เริ่มเรียนในเกาหลี</div><div class="tl-detail">KAIST: เริ่ม ส.ค. 2570 (Fall) | GKS: เรียนภาษาเกาหลี 1 ปีก่อน → เข้า Uni มี.ค. 2572</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EUROPE -->
+  <div id="cp-eu" class="cpanel">
+    <div class="note success-note">🇩🇪 <strong>เยอรมนี: ค่าเทอมฟรีทุกที่!</strong> มีแค่ค่า Semester Fee ~€300/ภาคเรียน (รวมค่าขนส่งสาธารณะด้วย)</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Application Portals</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">DAAD (ทุนเยอรมนี)</div><div class="portal-name">daad.de</div><div class="portal-link"><a class="ext" href="https://www.daad.de/en/" target="_blank">→ ค้นหาทุน DAAD</a></div></div>
+        <div class="portal-card"><div class="portal-label">KIT Karlsruhe</div><div class="portal-name">kit.edu</div><div class="portal-link"><a class="ext" href="https://www.kit.edu/english/index.php" target="_blank">→ เว็บ KIT</a></div></div>
+        <div class="portal-card"><div class="portal-label">RWTH Aachen</div><div class="portal-name">rwth-aachen.de</div><div class="portal-link"><a class="ext" href="https://www.rwth-aachen.de/go/id/a/" target="_blank">→ เว็บ RWTH</a></div></div>
+        <div class="portal-card"><div class="portal-label">TU Delft</div><div class="portal-name">tudelft.nl</div><div class="portal-link"><a class="ext" href="https://www.tudelft.nl/en/" target="_blank">→ เว็บ TU Delft</a></div></div>
+        <div class="portal-card"><div class="portal-label">KTH Sweden</div><div class="portal-name">kth.se</div><div class="portal-link"><a class="ext" href="https://www.kth.se/en" target="_blank">→ เว็บ KTH</a></div></div>
+        <div class="portal-card"><div class="portal-label">ETH Zurich</div><div class="portal-name">ethz.ch</div><div class="portal-link"><a class="ext" href="https://ethz.ch/en.html" target="_blank">→ เว็บ ETH Zurich</a></div></div>
+        <div class="portal-card"><div class="portal-label">SI Scholarship (Sweden)</div><div class="portal-name">si.se/en</div><div class="portal-link"><a class="ext" href="https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/" target="_blank">→ สมัครทุน SI</a></div></div>
+        <div class="portal-card"><div class="portal-label">Erasmus Mundus EMMBIOME</div><div class="portal-name">emmbiome.eu</div><div class="portal-link"><a class="ext" href="http://emmbiome.eu/" target="_blank">→ เว็บ EMMBIOME</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">ทุนที่หาได้ <span style="margin-left:8px;" class="gpa-ok">✅ GPA 3.37 โอเค สำหรับเยอรมนี</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">DAAD (เยอรมนี)</div><div class="req-value">Bachelor's + Master's</div><div class="req-sub">daad.de · Deadline มักเป็น ต.ค.–พ.ย.</div></div>
+        <div class="req-card"><div class="req-label">SI Scholarship (สวีเดน)</div><div class="req-value">Master's</div><div class="req-sub">si.se · Deadline ก.พ.</div></div>
+        <div class="req-card"><div class="req-label">Erasmus Mundus</div><div class="req-value">EMMBIOME (Master's)</div><div class="req-sub">emmbiome.eu · Deadline ม.ค.</div></div>
+        <div class="req-card"><div class="req-label">University Excellence</div><div class="req-value">หลายที่</div><div class="req-sub">KTH / ETH / KU Leuven มีทุน</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">มหาวิทยาลัย BME ชั้นนำ</div>
+      <table class="uni-table">
+        <tr><th>ประเทศ</th><th>มหาวิทยาลัย</th><th>ค่าเทอม/ปี</th><th>ภาษา</th></tr>
+        <tr><td>🇩🇪 เยอรมนี</td><td><a class="ext" href="https://www.kit.edu/english/index.php" target="_blank">KIT</a>, <a class="ext" href="https://www.rwth-aachen.de/go/id/a/" target="_blank">RWTH Aachen</a>, <a class="ext" href="https://www.tum.de/en/" target="_blank">TU Munich</a></td><td>ฟรี! (~€300)</td><td>อังกฤษ / เยอรมัน</td></tr>
+        <tr><td>🇳🇱 เนเธอร์แลนด์</td><td><a class="ext" href="https://www.tudelft.nl/en/" target="_blank">TU Delft</a>, TU/e Eindhoven</td><td>~€12,000 (Non-EU)</td><td>อังกฤษ</td></tr>
+        <tr><td>🇸🇪 สวีเดน</td><td><a class="ext" href="https://www.kth.se/en" target="_blank">KTH</a>, Chalmers</td><td>~€15,000 (Non-EU)</td><td>อังกฤษ</td></tr>
+        <tr><td>🇧🇪 เบลเยียม</td><td>KU Leuven, Ghent</td><td>~€4,000–8,000</td><td>อังกฤษ</td></tr>
+        <tr><td>🇨🇭 สวิตเซอร์แลนด์</td><td><a class="ext" href="https://ethz.ch/en.html" target="_blank">ETH Zurich</a></td><td>CHF 730/ภาค</td><td>อังกฤษ</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline (สำหรับ September 2028 intake)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">ส.ค.–ธ.ค. 2569</div><div class="tl-title">เรียน ICT ปี 1 + เตรียม IELTS</div><div class="tl-detail">ยุโรปไม่รับ TOEIC · ต้อง IELTS 6.5–7.0 · เริ่มอ่านคู่ขนาน</div></div>
+        <div class="tl-item"><div class="tl-date">ก.ย.–ต.ค. 2570</div><div class="tl-title">สอบ IELTS</div><div class="tl-detail">เป้า 7.0+ · จอง IDP / British Council ล่วงหน้า 4–6 สัปดาห์</div></div>
+        <div class="tl-item hot"><div class="tl-date">ต.ค. 2570 – ม.ค. 2571</div><div class="tl-title">⚡ ยื่นสมัครมหาวิทยาลัย + ทุน</div><div class="tl-detail">TU Delft: 1 ม.ค. · KTH: 15 ม.ค. · RWTH: มี.ค. · ETH: เม.ย.</div>
+          <div class="tl-steps">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>Online application ผ่านเว็บมหาวิทยาลัย / uni-assist.de (เยอรมนี)</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>Transcript + Motivation Letter + CV</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>2 Letters of Recommendation</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>IELTS score + หนังสือเดินทาง</span></div>
+          </div>
+        </div>
+        <div class="tl-item"><div class="tl-date">มี.ค.–มิ.ย. 2571</div><div class="tl-title">ประกาศผล + ขอวีซ่านักเรียน</div><div class="tl-detail">วีซ่าเยอรมนี: ต้องมี Sperrkonto (blocked account) ~€11,208 + ยื่นที่สถานทูต</div></div>
+        <div class="tl-item"><div class="tl-date">ก.ย. 2571</div><div class="tl-title">เริ่มเรียน BME ในยุโรป</div><div class="tl-detail">ลาออก ICT หลัง confirm · บินไปยุโรป · 3–4 ปี Bachelor's</div></div>
+      </div>
+    </div>
+    <div class="note warn-note">⚠️ เนเธอร์แลนด์/สวีเดน ค่าเทอม Non-EU แพงมาก (~€12–15k/ปี) ต้องได้ทุน university scholarship ด้วย ไม่งั้นค่าใช้จ่ายสูงกว่าที่อื่น</div>
+  </div>
+
+  <!-- USA -->
+  <div id="cp-us" class="cpanel">
+    <div class="note warn-note">⚠️ USA แพงที่สุด ~$60–80k/ปีรวมค่าครองชีพ · ต้องได้ Full/Near-Full Scholarship ถึงจะคุ้ม · ลองสมัครเพื่อ Merit Scholarship</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Application Portals</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">Common App (สมัครรวม)</div><div class="portal-name">commonapp.org</div><div class="portal-link"><a class="ext" href="https://www.commonapp.org/" target="_blank">→ สมัครที่ Common App</a></div></div>
+        <div class="portal-card"><div class="portal-label">Johns Hopkins BME</div><div class="portal-name">bme.jhu.edu</div><div class="portal-link"><a class="ext" href="https://www.bme.jhu.edu/" target="_blank">→ #1 BME ในสหรัฐ</a></div></div>
+        <div class="portal-card"><div class="portal-label">Georgia Tech BME</div><div class="portal-name">bme.gatech.edu</div><div class="portal-link"><a class="ext" href="https://bme.gatech.edu/" target="_blank">→ #2 BME · ค่าเทอมต่ำกว่า</a></div></div>
+        <div class="portal-card"><div class="portal-label">Duke BME</div><div class="portal-name">bme.duke.edu</div><div class="portal-link"><a class="ext" href="https://bme.duke.edu/" target="_blank">→ Top 5 BME</a></div></div>
+        <div class="portal-card"><div class="portal-label">Boston University BME</div><div class="portal-name">bu.edu/bme</div><div class="portal-link"><a class="ext" href="https://www.bu.edu/bme/" target="_blank">→ Trustee Scholarship ให้ Full!</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Requirements <span style="margin-left:8px;" class="gpa-warn">⚠️ GPA 3.37 → ต้องมี SAT สูง + เนื้อเรื่องดีมากถึงชดเชย</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">SAT</div><div class="req-value">1400+</div><div class="req-sub">ACT 32+ ก็ยอมรับ</div></div>
+        <div class="req-card"><div class="req-label">TOEFL</div><div class="req-value">100+</div><div class="req-sub">IELTS 7.0+ ก็ได้</div></div>
+        <div class="req-card"><div class="req-label">GPA</div><div class="req-value">3.5+ / 4.0</div><div class="req-sub">Unweighted</div></div>
+        <div class="req-card"><div class="req-label">Essay</div><div class="req-value">Common App</div><div class="req-sub">Personal Statement + Supplemental</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Top BME Universities</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>BME Rank</th><th>ค่าเทอม/ปี</th><th>Merit Scholarship</th></tr>
+        <tr><td><a class="ext" href="https://www.bme.jhu.edu/" target="_blank">Johns Hopkins</a></td><td>#1</td><td>~$62k</td><td>มี แต่น้อย</td></tr>
+        <tr><td><a class="ext" href="https://bme.gatech.edu/" target="_blank">Georgia Tech</a></td><td>#2</td><td>~$33k (OOS)</td><td>มี (Presidential Fellow)</td></tr>
+        <tr><td><a class="ext" href="https://bme.duke.edu/" target="_blank">Duke University</a></td><td>Top 5</td><td>~$63k</td><td>Robertson Scholars</td></tr>
+        <tr><td><a class="ext" href="https://bme.rice.edu/" target="_blank">Rice University</a></td><td>Top 10</td><td>~$55k</td><td>Brown Foundation Scholar</td></tr>
+        <tr><td><a class="ext" href="https://be.ucsd.edu/" target="_blank">UC San Diego</a></td><td>Top 10</td><td>~$47k (OOS)</td><td>Regents Scholar</td></tr>
+        <tr><td><a class="ext" href="https://www.bu.edu/bme/" target="_blank">Boston University</a></td><td>Top 20</td><td>~$58k</td><td>Trustee Scholarship (Full!) ⭐</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">ส.ค. 2569 – ก.ค. 2570</div><div class="tl-title">เรียน ICT ปี 1 + เตรียม SAT + TOEFL</div><div class="tl-detail">SAT: วางแผนสอบ 2–3 รอบ (ก.ค./ส.ค./ต.ค.) | TOEFL: สอบ ส.ค.–ก.ย. 2570</div></div>
+        <div class="tl-item"><div class="tl-date">ส.ค. 2570</div><div class="tl-title">Common App เปิด + เริ่มเขียน Essay</div><div class="tl-detail">Personal Statement 650 คำ + Supplemental Essays (แต่ละ Uni) · ขอ LoR จากอาจารย์ ICT ล่วงหน้า</div></div>
+        <div class="tl-item hot"><div class="tl-date">1 พ.ย. 2570</div><div class="tl-title">⚡ Early Decision / Early Action Deadline</div><div class="tl-detail">Johns Hopkins ED: 1 พ.ย. · Duke EA: 1 พ.ย. · Rice EA: 1 พ.ย. · ผล ED ใน ธ.ค. 2570</div><div class="tl-tags"><span class="tl-tag accent">ED เพิ่มโอกาสรับ แต่ผูกมัดถ้า aid พอ</span></div></div>
+        <div class="tl-item hot"><div class="tl-date">1 ม.ค. 2571</div><div class="tl-title">⚡ Regular Decision Deadline</div><div class="tl-detail">Georgia Tech: 1 ม.ค. · Boston U: 2 ม.ค. · UC: 30 พ.ย. (ก่อนหน้า)</div></div>
+        <div class="tl-item"><div class="tl-date">มี.ค.–เม.ย. 2571</div><div class="tl-title">ประกาศผล + Financial Aid Package</div><div class="tl-detail">ดู Net Cost ก่อนตัดสินใจ · National Decision Day = 1 พ.ค.</div></div>
+        <div class="tl-item"><div class="tl-date">ส.ค. 2571</div><div class="tl-title">เริ่มเรียน BME ในสหรัฐ</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHINA -->
+  <div id="cp-cn" class="cpanel">
+    <div class="note success-note">📋 <strong>CSC Scholarship:</strong> ค่าเทอม + หอพัก + ¥2,500–3,000/เดือน + ประกันสุขภาพ · สมัครผ่าน csc.edu.cn</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Application Portals</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">CSC Scholarship Portal</div><div class="portal-name">csc.edu.cn</div><div class="portal-link"><a class="ext" href="https://www.csc.edu.cn/" target="_blank">→ สมัคร CSC</a></div></div>
+        <div class="portal-card"><div class="portal-label">Tsinghua University</div><div class="portal-name">tsinghua.edu.cn</div><div class="portal-link"><a class="ext" href="https://www.tsinghua.edu.cn/en/" target="_blank">→ อันดับ 1 จีน</a></div></div>
+        <div class="portal-card"><div class="portal-label">Shanghai Jiao Tong (SJTU)</div><div class="portal-name">en.sjtu.edu.cn</div><div class="portal-link"><a class="ext" href="https://en.sjtu.edu.cn/" target="_blank">→ เว็บ SJTU</a></div></div>
+        <div class="portal-card"><div class="portal-label">Zhejiang University</div><div class="portal-name">zju.edu.cn</div><div class="portal-link"><a class="ext" href="https://www.zju.edu.cn/english/" target="_blank">→ เว็บ ZJU</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Requirements <span style="margin-left:8px;" class="gpa-ok">✅ GPA 3.37 ผ่านเกณฑ์ CSC (≥3.0)</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">TOEFL / IELTS</div><div class="req-value">80+ / 6.0+</div><div class="req-sub">สำหรับโปรแกรมอังกฤษ</div></div>
+        <div class="req-card"><div class="req-label">GPA</div><div class="req-value">≥ 3.0</div><div class="req-sub">HSK ไม่บังคับ (โปรแกรมอังกฤษ)</div></div>
+        <div class="req-card"><div class="req-label">อายุ</div><div class="req-value">≤ 25 ปี</div><div class="req-sub">✅ ปัจจุบัน 17 ปี</div></div>
+        <div class="req-card"><div class="req-label">Medical</div><div class="req-value">ใบตรวจสุขภาพ</div><div class="req-sub">จากโรงพยาบาลรัฐ</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">มหาวิทยาลัยเป้าหมาย</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>สาขา</th><th>City</th><th>หมายเหตุ</th></tr>
+        <tr><td><a class="ext" href="https://www.tsinghua.edu.cn/en/" target="_blank">Tsinghua University</a></td><td>Biomedical Engineering</td><td>Beijing</td><td>อันดับ 1 จีน · มีโปรแกรม EN</td></tr>
+        <tr><td><a class="ext" href="https://en.sjtu.edu.cn/" target="_blank">Shanghai Jiao Tong</a></td><td>Biomedical Engineering</td><td>Shanghai</td><td>Medical + Engineering ดีมาก</td></tr>
+        <tr><td><a class="ext" href="https://www.zju.edu.cn/english/" target="_blank">Zhejiang University</a></td><td>Biomedical Engineering</td><td>Hangzhou</td><td>Research แข็งแกร่ง</td></tr>
+        <tr><td><a class="ext" href="https://www.fudan.edu.cn/en/" target="_blank">Fudan University</a></td><td>Biomedical Sciences</td><td>Shanghai</td><td>ชื่อดัง · Liberal Arts + Science</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">ส.ค. 2569 – ก.พ. 2570</div><div class="tl-title">เรียน ICT + เตรียม TOEFL/IELTS</div></div>
+        <div class="tl-item hot"><div class="tl-date">ม.ค.–มี.ค. 2570</div><div class="tl-title">⚡ สมัคร CSC Scholarship 2027</div><div class="tl-detail">Deadline ~มี.ค.–เม.ย. ทุกปี · ยื่นผ่าน csc.edu.cn + เว็บมหาวิทยาลัย</div>
+          <div class="tl-steps">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>Register บน studyinchina.csc.edu.cn</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>Application Form + Personal Statement + Study Plan</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>Transcript + 2 LoR จากอาจารย์ระดับ Associate Prof+</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>TOEFL/IELTS + สำเนา Passport</span></div>
+            <div class="tl-step"><div class="tl-step-num">5</div><span>Physical Examination Form (ตรวจสุขภาพที่โรงพยาบาลรัฐ)</span></div>
+          </div>
+        </div>
+        <div class="tl-item"><div class="tl-date">พ.ค.–ก.ค. 2570</div><div class="tl-title">ประกาศผล CSC</div><div class="tl-detail">ถ้าได้ทุน: ขอวีซ่านักเรียน X1 ที่สถานทูตจีนในไทย</div></div>
+        <div class="tl-item"><div class="tl-date">ก.ย. 2570</div><div class="tl-title">เริ่มเรียนในจีน</div><div class="tl-detail">ลาออก ICT หลัง confirm · เดินทางไป Beijing / Shanghai / Hangzhou</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAIWAN + ASIA -->
+  <div id="cp-tw" class="cpanel">
+    <div class="note success-note" style="border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.06);">🌏 <strong>Taiwan MOE Scholarship:</strong> ค่าเทอม + NT$15,000/เดือน (~14,000 บาท) · ไม่ต้องสอบภาษาจีน (โปรแกรมอังกฤษ) · สมัคร ก.พ.–เม.ย. ทุกปี</div>
+
+    <div class="section">
+      <div class="section-title">🔗 Links & Portals — Taiwan</div>
+      <div class="portal-grid">
+        <div class="portal-card"><div class="portal-label">MOE Taiwan Scholarship</div><div class="portal-name">taiwanscholarship.moe.gov.tw</div><div class="portal-link"><a class="ext" href="https://taiwanscholarship.moe.gov.tw/web/index.aspx" target="_blank">→ สมัครทุน MOE</a></div></div>
+        <div class="portal-card"><div class="portal-label">NTU Biomedical Eng.</div><div class="portal-name">bme.ntu.edu.tw</div><div class="portal-link"><a class="ext" href="https://www.bme.ntu.edu.tw/index_en.html" target="_blank">→ อันดับ 1 ไต้หวัน</a></div></div>
+        <div class="portal-card"><div class="portal-label">NTHU Biomedical Eng.</div><div class="portal-name">pme.nthu.edu.tw</div><div class="portal-link"><a class="ext" href="https://pme.site.nthu.edu.tw/" target="_blank">→ เว็บ NTHU BME</a></div></div>
+        <div class="portal-card"><div class="portal-label">NCKU BME</div><div class="portal-name">bme.ncku.edu.tw</div><div class="portal-link"><a class="ext" href="https://www.bme.ncku.edu.tw/en/" target="_blank">→ เว็บ NCKU BME</a></div></div>
+        <div class="portal-card"><div class="portal-label">NUS BME (Singapore)</div><div class="portal-name">cde.nus.edu.sg/bme</div><div class="portal-link"><a class="ext" href="https://cde.nus.edu.sg/bme/undergraduate/admissions/" target="_blank">→ NUS Admissions</a></div></div>
+        <div class="portal-card"><div class="portal-label">NTU Singapore BME</div><div class="portal-name">ntu.edu.sg</div><div class="portal-link"><a class="ext" href="https://www.ntu.edu.sg/scbe/programmes/undergraduate/biomedical-engineering" target="_blank">→ NTU Singapore BME</a></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Requirements <span style="margin-left:8px;" class="gpa-ok">✅ GPA 3.37 ผ่าน MOE Taiwan + NUS ASEAN</span></div>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-label">GPA (MOE Taiwan)</div><div class="req-value">ไม่มีขั้นต่ำชัด</div><div class="req-sub">3.37 ✅ · competitive แต่โอกาสดี</div></div>
+        <div class="req-card"><div class="req-label">ภาษา</div><div class="req-value">IELTS 6.0+ / TOEFL 80+</div><div class="req-sub">สำหรับโปรแกรมอังกฤษ · ไม่ต้องรู้จีน</div></div>
+        <div class="req-card"><div class="req-label">อายุ (MOE)</div><div class="req-value">≤ 35 ปี</div><div class="req-sub">✅ ไม่มีปัญหาเลย</div></div>
+        <div class="req-card"><div class="req-label">NUS ASEAN Scholarship</div><div class="req-value">GPA + Interview</div><div class="req-sub">ปิดตาย competitive · ต้องการ portfolio</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🇹🇼 ไต้หวัน — Top BME Universities</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>สาขา BME</th><th>ค่าเทอม/ปี</th><th>จุดเด่น</th></tr>
+        <tr><td><a class="ext" href="https://www.bme.ntu.edu.tw/index_en.html" target="_blank">🏆 NTU (National Taiwan Univ.)</a></td><td>Biomedical Engineering</td><td>NT$50k (~55k฿)</td><td>อันดับ 1 ไต้หวัน · Research แนวหน้า · ASEAN สัมพันธ์ดี</td></tr>
+        <tr><td><a class="ext" href="https://pme.site.nthu.edu.tw/" target="_blank">NTHU (National Tsing Hua)</a></td><td>Power Mech./Biomed.</td><td>NT$50k</td><td>เน้น Engineering · AI+Bio แข็งแกร่ง ⭐</td></tr>
+        <tr><td><a class="ext" href="https://www.bme.ncku.edu.tw/en/" target="_blank">NCKU (National Cheng Kung)</a></td><td>Biomedical Engineering</td><td>NT$48k</td><td>เมือง Tainan · เน้น Medical Device</td></tr>
+        <tr><td>NYMU (Yang Ming Chiao Tung)</td><td>Biomedical Engineering</td><td>NT$48k</td><td>ควบรวม Medical + Tech · ดีมาก</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🇸🇬 สิงคโปร์ — World-Class แต่แข่งสูง</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>สาขา</th><th>ทุนที่มี</th><th>ระดับความยาก</th></tr>
+        <tr><td><a class="ext" href="https://cde.nus.edu.sg/bme/undergraduate/admissions/" target="_blank">🏆 NUS</a></td><td>Biomedical Engineering</td><td>ASEAN Scholarship (ป.ตรีฟรี!)</td><td>ยากมาก · อันดับ Top 5 เอเชีย</td></tr>
+        <tr><td><a class="ext" href="https://www.ntu.edu.sg/scbe/programmes/undergraduate/biomedical-engineering" target="_blank">NTU Singapore</a></td><td>Biomedical Engineering</td><td>NTU Scholarship</td><td>ยากมาก · Research ดีมาก</td></tr>
+      </table>
+      <div class="note" style="margin-top:1rem;">💡 <strong>ASEAN Undergraduate Scholarship (NUS/NTU):</strong> ค่าเทอม + หอพัก + SGD 5,800/ปี ค่าครองชีพ · แต่ต้องทำงานในสิงคโปร์ 3 ปีหลังจบ</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🇮🇳 อินเดีย — ตัวเลือก Research High-Value ต้นทุนต่ำ</div>
+      <table class="uni-table">
+        <tr><th>มหาวิทยาลัย</th><th>หมายเหตุ</th><th>ค่าเทอม/ปี</th></tr>
+        <tr><td><a class="ext" href="https://www.iitb.ac.in/" target="_blank">IIT Bombay / Delhi / Madras</a></td><td>BME / Bioscience & Bioengineering · ICCR Scholarship สำหรับนักศึกษาต่างชาติ</td><td>ต่ำมาก ($500–1,000)</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Timeline — MOE Taiwan 2027 (เร็วและง่ายที่สุดในกลุ่มนี้)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-date">ส.ค. 2569 – ม.ค. 2570</div><div class="tl-title">เรียน ICT ปี 1 + เตรียม IELTS</div><div class="tl-detail">เป้า IELTS 6.5+ · เริ่มดูโปรแกรม BME ใน NTU / NTHU ล่วงหน้า</div></div>
+        <div class="tl-item hot"><div class="tl-date">ก.พ.–เม.ย. 2570</div><div class="tl-title">⚡ สมัคร MOE Taiwan Scholarship 2027</div><div class="tl-detail">ยื่นผ่าน <a class="ext" href="https://taiwanscholarship.moe.gov.tw/" target="_blank">taiwanscholarship.moe.gov.tw</a> + เว็บมหาวิทยาลัยที่ต้องการ · เลือกได้สูงสุด 3 แห่ง
+          <div class="tl-steps" style="margin-top:8px;">
+            <div class="tl-step"><div class="tl-step-num">1</div><span>กรอก Application Form online + เลือก NTU / NTHU / NCKU</span></div>
+            <div class="tl-step"><div class="tl-step-num">2</div><span>Transcript ม.ปลาย + ICT ปี 1 (Official)</span></div>
+            <div class="tl-step"><div class="tl-step-num">3</div><span>Study Plan + LoR 2 ฉบับ</span></div>
+            <div class="tl-step"><div class="tl-step-num">4</div><span>IELTS/TOEFL score + Health Certificate</span></div>
+          </div>
+          <div class="tl-tags"><span class="tl-tag ok">ค่าเทอมฟรี + NT$15,000/เดือน</span><span class="tl-tag info">ไม่ต้องรู้ภาษาจีน</span></div>
+        </div>
+        <div class="tl-item"><div class="tl-date">พ.ค.–ก.ค. 2570</div><div class="tl-title">ประกาศผล + Interview (บางที่)</div><div class="tl-detail">บางมหาวิทยาลัยมี online interview ก่อนประกาศผลสุดท้าย</div></div>
+        <div class="tl-item"><div class="tl-date">ก.ย. 2570</div><div class="tl-title">เริ่มเรียน BME ในไต้หวัน</div><div class="tl-detail">ลาออก ICT หลัง confirm · เดินทางไป Taipei / Hsinchu · เมืองสะอาด ปลอดภัย ค่าครองชีพถูกกว่าเกาหลี/ญี่ปุ่น</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     CASE 2: BME ในไทย
+════════════════════════════════════════════ -->
+<div id="page-case2" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">🇹🇭 เคส 2: BME ในไทย (TCAS70)</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;">สอบ A-Level ขณะเรียน ICT ปี 1 · สมัคร TCAS70 · ไม่ต้องลาออกก่อนสมัคร · ลาออกหลังยืนยันสิทธิ์</p>
+
+  <div class="note success-note">✅ <strong>กฎ TCAS อย่างเป็นทางการ (mytcas.com):</strong> นักศึกษาที่เรียนอยู่ในมหาวิทยาลัย ไม่ต้องลาออกก่อนสมัคร TCAS — ลาออกหลังยืนยันสิทธิ์เท่านั้น</div>
+
+  <div class="section">
+    <div class="section-title">🔗 Links & Application Portals — Thailand</div>
+    <div class="portal-grid">
+      <div class="portal-card"><div class="portal-label">TCAS สมัครสอบ/ยืนยันสิทธิ์</div><div class="portal-name">mytcas.com</div><div class="portal-link"><a class="ext" href="https://www.mytcas.com/" target="_blank">→ เว็บ TCAS ทางการ</a></div></div>
+      <div class="portal-card"><div class="portal-label">สมัครสอบ A-Level / TGAT</div><div class="portal-name">student.mytcas.com</div><div class="portal-link"><a class="ext" href="https://student.mytcas.com/" target="_blank">→ สมัครสอบที่นี่</a></div></div>
+      <div class="portal-card"><div class="portal-label">มหิดล BME (Salaya)</div><div class="portal-name">eg.mahidol.ac.th/dept/egbe</div><div class="portal-link"><a class="ext" href="https://www.eg.mahidol.ac.th/dept/egbe/admission.html" target="_blank">→ ข้อมูลรับสมัคร MU BME</a></div></div>
+      <div class="portal-card"><div class="portal-label">มหิดล TCAS Portal</div><div class="portal-name">tcas.mahidol.ac.th</div><div class="portal-link"><a class="ext" href="https://tcas.mahidol.ac.th/" target="_blank">→ TCAS มหิดล</a></div></div>
+      <div class="portal-card"><div class="portal-label">KMITL BME</div><div class="portal-name">bme.kmitl.ac.th</div><div class="portal-link"><a class="ext" href="https://bme.kmitl.ac.th/" target="_blank">→ เว็บ KMITL BME</a></div></div>
+      <div class="portal-card"><div class="portal-label">KMITL Int'l Program</div><div class="portal-name">kmitl.ac.th (Int'l)</div><div class="portal-link"><a class="ext" href="https://sites.google.com/kmitl.ac.th/internationalengineeringkmitl/" target="_blank">→ หลักสูตรภาษาอังกฤษ</a></div></div>
+      <div class="portal-card"><div class="portal-label">จุฬา BME</div><div class="portal-name">eng.chula.ac.th</div><div class="portal-link"><a class="ext" href="https://www.eng.chula.ac.th/en/department/department-biomedical-engineering" target="_blank">→ เว็บ Chula BME</a></div></div>
+      <div class="portal-card"><div class="portal-label">NUS BME (สิงคโปร์)</div><div class="portal-name">cde.nus.edu.sg/bme</div><div class="portal-link"><a class="ext" href="https://cde.nus.edu.sg/bme/undergraduate/admissions/" target="_blank">→ NUS BME Admissions</a></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">BME Universities ในไทย <span style="margin-left:8px;" class="gpa-ok">✅ GPA 3.37 → โอกาสพอสมควร (ขึ้นกับ A-Level)</span></div>
+    <table class="uni-table">
+      <tr><th>มหาวิทยาลัย</th><th>สาขา</th><th>ใช้คะแนนอะไร</th><th>หมายเหตุ</th></tr>
+      <tr><td><a class="ext" href="https://www.eng.chula.ac.th/en/department/department-biomedical-engineering" target="_blank">จุฬาลงกรณ์</a></td><td>วิศวกรรมชีวการแพทย์</td><td>A-Level: ฟิสิกส์ เคมี ชีว คณิต 1 + TGAT</td><td>ชื่อดังที่สุด · แข่งสูงมาก</td></tr>
+      <tr><td><a class="ext" href="https://www.eg.mahidol.ac.th/dept/egbe/admission.html" target="_blank">มหาวิทยาลัยมหิดล</a></td><td>วทบ. BME / Applied Science</td><td>A-Level + TGAT · Quota มี</td><td>อยู่ Salaya เหมือน ICT! อาจ transfer credit ⭐</td></tr>
+      <tr><td><a class="ext" href="https://bme.kmitl.ac.th/" target="_blank">KMITL</a></td><td>วิศวกรรมชีวการแพทย์</td><td>A-Level + TGAT · มี Int'l Program</td><td>มีโปรแกรมภาษาอังกฤษ</td></tr>
+      <tr><td>มศว</td><td>Biomedical Sciences</td><td>A-Level + TGAT</td><td>ฝั่ง science มากกว่า engineering</td></tr>
+      <tr><td>มธ. (ธรรมศาสตร์)</td><td>วิศวกรรมชีวการแพทย์</td><td>A-Level + TGAT</td><td>เพิ่งเปิดหลักสูตรใหม่</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">วิชา A-Level ที่ต้องสอบ</div>
+    <div class="req-grid">
+      <div class="req-card"><div class="req-label">ฟิสิกส์</div><div class="req-value">A-Level Physics</div><div class="req-sub">สำคัญมาก · เกือบทุก BME ต้องการ</div></div>
+      <div class="req-card"><div class="req-label">เคมี</div><div class="req-value">A-Level Chemistry</div><div class="req-sub">สำคัญมาก</div></div>
+      <div class="req-card"><div class="req-label">ชีววิทยา</div><div class="req-value">A-Level Biology</div><div class="req-sub">สำคัญ · โดยเฉพาะ MU BME</div></div>
+      <div class="req-card"><div class="req-label">คณิต 1</div><div class="req-value">A-Level Math 1</div><div class="req-sub">บางที่ใช้คณิต 2 เพิ่มด้วย</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Timeline TCAS70 (อ้างอิงจริง)</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">ส.ค. 2569</div><div class="tl-title">เปิดเทอม ICT ปี 1 + เริ่มอ่าน A-Level คู่ขนาน</div><div class="tl-detail">วิชา ICT ที่ overlap: Physics (ฟิสิกส์ต้องอ่านเพิ่ม), Mathematics (ใช้ได้เลย)</div></div>
+      <div class="tl-item"><div class="tl-date">15 ส.ค. 2569</div><div class="tl-title">เปิดรับสมัคร TCAS รอบ 1 Portfolio</div><div class="tl-detail">บาง BME มีรอบ Portfolio · ต้องการ: โครงงานวิทยาศาสตร์ / เกียรติบัตร / กิจกรรม · เช็กรายละเอียดแต่ละ Uni</div></div>
+      <div class="tl-item hot"><div class="tl-date">4–10 พ.ย. 2569</div><div class="tl-title">⚡ สมัครสอบ TGAT / TPAT2-5</div><div class="tl-detail">สมัครที่ student.mytcas.com · TGAT (ความถนัดทั่วไป) BME ส่วนใหญ่ใช้</div><div class="tl-tags"><span class="tl-tag warn">ถ้าพลาดช่วงนี้ = ไม่มีคะแนน TGAT สำหรับ TCAS70!</span></div></div>
+      <div class="tl-item"><div class="tl-date">10 มี.ค. 2570</div><div class="tl-title">ประกาศผล TCAS รอบ 1 Portfolio</div><div class="tl-detail">ยืนยันสิทธิ์ 10–11 มี.ค. · สละสิทธิ์ 12 มี.ค.</div></div>
+      <div class="tl-item hot"><div class="tl-date">14–20 ม.ค. 2570</div><div class="tl-title">⚡ สมัครสอบ A-Level</div><div class="tl-detail">สมัครที่ student.mytcas.com · เลือกวิชา: ฟิสิกส์ + เคมี + ชีว + คณิต 1 (+ อังกฤษ ถ้าต้องการ)</div></div>
+      <div class="tl-item"><div class="tl-date">30–31 ม.ค. 2570</div><div class="tl-title">สอบ TGAT + TPAT</div><div class="tl-detail">30 ม.ค.: TPAT3 09:00 + TGAT 13:00 | 31 ม.ค.: TPAT5 + TPAT2</div></div>
+      <div class="tl-item"><div class="tl-date">28 ก.พ. 2570</div><div class="tl-title">ประกาศผล TGAT/TPAT</div></div>
+      <div class="tl-item hot"><div class="tl-date">13–15 มี.ค. 2570</div><div class="tl-title">⚡⚡ วันสอบ A-Level</div><div class="tl-detail">13 มี.ค.: ชีว (8:30) + ฟิสิกส์ (11:00) + ไทย + สังคม<br>14 มี.ค.: คณิต 1 (8:30) + อังกฤษ (11:00) + เคมี (13:30)<br>15 มี.ค.: คณิต 2 + วิทย์ฯ ประยุกต์</div><div class="tl-tags"><span class="tl-tag accent">วันที่สำคัญที่สุดของเคสนี้!</span></div></div>
+      <div class="tl-item"><div class="tl-date">ตั้งแต่ 13 มี.ค. 2570</div><div class="tl-title">เปิดรับสมัคร TCAS รอบ 2 Quota</div><div class="tl-detail">MU BME / KMITL มักมีรอบ Quota · สมัครก่อนผล A-Level ออก</div></div>
+      <div class="tl-item"><div class="tl-date">20 เม.ย. 2570</div><div class="tl-title">ประกาศผลสอบ A-Level</div></div>
+      <div class="tl-item"><div class="tl-date">3–4 พ.ค. 2570</div><div class="tl-title">ประกาศผล + ยืนยันสิทธิ์ TCAS รอบ 2</div><div class="tl-detail">ยืนยัน 3–4 พ.ค. · สละสิทธิ์ 5 พ.ค.</div></div>
+      <div class="tl-item hot"><div class="tl-date">7–11 พ.ค. 2570</div><div class="tl-title">⚡ สมัคร TCAS รอบ 3 Admission</div><div class="tl-detail">จัดอันดับ BME: จุฬา → มหิดล → KMITL (แนะนำ) · ใช้คะแนน A-Level เต็ม</div><div class="tl-tags"><span class="tl-tag ok">ไม่ต้องลาออก ICT ก่อนสมัคร</span></div></div>
+      <div class="tl-item"><div class="tl-date">22 พ.ค. 2570</div><div class="tl-title">ประกาศผลรอบ 3 ครั้งที่ 1</div><div class="tl-detail">ยืนยันสิทธิ์ 22–23 พ.ค. · ถ้าได้ → ยื่นลาออก ICT ก่อนลงทะเบียนที่ใหม่</div><div class="tl-tags"><span class="tl-tag warn">ลาออก ICT ตอนนี้!</span></div></div>
+      <div class="tl-item"><div class="tl-date">มิ.ย.–ส.ค. 2570</div><div class="tl-title">ลงทะเบียนเรียน BME ปี 1 ที่ใหม่</div><div class="tl-detail">ถ้า MU BME (Salaya) อาจขอ Credit Transfer วิชาที่ overlap จาก ICT ได้บางส่วน</div></div>
+    </div>
+  </div>
+
+  <div class="note">💡 <strong>เคล็ดลับ BME มหิดล:</strong> อยู่ Salaya เดียวกับ ICT · อาจขอ Credit Transfer วิชา Physics, Math, English จาก ICT ได้ · ประหยัดเวลา 1–2 วิชา ต้องสอบถาม Registrar ก่อน</div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     CASE 3
+════════════════════════════════════════════ -->
+<div id="page-case3" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">🎓 เคส 3: จบ ICT ก่อน → BME ทีหลัง</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;">เรียน ICT DST 4 ปีจนจบ แล้วต่อ Master's BME ในหรือต่างประเทศ · ปลอดภัยที่สุด · ได้ Double Degree</p>
+
+  <div class="note success-note">💡 <strong>ข้อได้เปรียบสำคัญ:</strong> B.Sc. ICT + M.Sc./M.Eng. BME = profile ที่หายากมากในสาย Medical AI / Digital Health / Medical Imaging ซึ่งตลาดงานต้องการสูงมาก</div>
+
+  <div class="section">
+    <div class="section-title">3 ตัวเลือกหลังจบ ICT</div>
+    <div class="alt-grid">
+      <div class="alt-card">
+        <div class="alt-title">Option A: Master's BME ต่างประเทศ</div>
+        <div class="alt-desc">สมัครทุน MEXT Research / GKS Master's / Erasmus Mundus EMMBIOME หลังจบ ICT · ใช้เวลา 1.5–2 ปี</div>
+        <div class="alt-pros">✅ ได้ทุนมากกว่า Master's level · GPA จาก ICT ช่วยได้</div>
+        <div class="alt-cons">⚠️ รอนาน 4 ปีก่อนเริ่ม BME</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-title">Option B: Master's BME ในไทย</div>
+        <div class="alt-desc">MU Faculty of Engineering BME / จุฬา Biomedical Engineering Master's · เรียน 2 ปี ไม่ต้องออกจากไทย</div>
+        <div class="alt-pros">✅ ไม่ต้องย้ายประเทศ · ค่าใช้จ่ายต่ำ · เข้าง่ายกว่า</div>
+        <div class="alt-cons">⚠️ Network / Research อ่อนกว่าต่างประเทศ</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-title">Option C: 2nd Bachelor's BME</div>
+        <div class="alt-desc">สมัคร BME ปริญญาตรีใบที่ 2 (เยอรมนีรับ second degree) หรือ TCAS เข้า BME ไทยหลังจบ ICT</div>
+        <div class="alt-pros">✅ ได้ใบ Engineering ตรงๆ</div>
+        <div class="alt-cons">⚠️ เสียเวลา 3–4 ปีอีกรอบ · ไม่คุ้มเท่า Master's</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Timeline เต็ม</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">ส.ค. 2569 – พ.ค. 2573</div><div class="tl-title">เรียน ICT DST ปี 1–4 (B.Sc.)</div><div class="tl-detail">เป้า GPA ≥ 3.5 · ทำ Research / Senior Project ด้าน Biomedical AI, Medical Imaging, BioSignal Processing · เรียนวิชาเลือกที่ overlap: Biostatistics, Bio-computing</div></div>
+      <div class="tl-item"><div class="tl-date">ปี 2–3 (2570–72)</div><div class="tl-title">เตรียมตัวระยะยาว</div><div class="tl-detail">· สอบ IELTS (เป้า 7.0+) ปี 3<br>· Contact Professor ต่างประเทศ (cold email) ขอ research internship / supervision<br>· เข้า Lab ด้าน Biomedical ในมหิดล หรือ partner university<br>· GRE (ถ้า target USA Master's)</div></div>
+      <div class="tl-item"><div class="tl-date">ปี 4 (2572–73)</div><div class="tl-title">สมัครทุน Master's</div><div class="tl-detail">· MEXT Research Scholarship (Embassy, ~มิ.ย.)<br>· GKS Graduate (Embassy, ~ก.พ.)<br>· Erasmus Mundus EMMBIOME (emmbiome.eu, ~ม.ค.)<br>· KAIST Graduate (ก.ย.–ต.ค.)<br>· Chevening (UK, ~พ.ย.)</div></div>
+      <div class="tl-item"><div class="tl-date">พ.ค.–ส.ค. 2573</div><div class="tl-title">จบ ICT (B.Sc. DST) + รอผลทุน</div></div>
+      <div class="tl-item"><div class="tl-date">ก.ย. 2573 / มี.ค. 2574</div><div class="tl-title">เริ่มเรียน Master's BME</div><div class="tl-detail">1.5–2 ปี · จบ 2575 · มี Double Degree: B.Sc. ICT + M.Sc. BME</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Erasmus Mundus EMMBIOME (แนะนำที่สุดสำหรับ Option A)</div>
+    <div class="note">📋 <strong>EMMBIOME</strong> = Erasmus Mundus Master in Biomedical Engineering · เรียน 2 ปีใน 3 มหาวิทยาลัยในยุโรป · ทุน: €1,400/เดือน + ค่าเทอมฟรี + ตั๋วเครื่องบิน · emmbiome.eu · Deadline: ~ม.ค. ทุกปี</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     ALTERNATIVE PATHS
+════════════════════════════════════════════ -->
+<div id="page-alt" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">💡 ทางเลือกอื่นๆ ที่อาจไม่ได้คิดถึง</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;">ความเป็นไปได้เพิ่มเติมที่อาจเหมาะกับสถานการณ์ · บางอย่างทำควบคู่กับเคส 1–3 ได้</div>
+
+  <div class="section">
+    <div class="section-title">ทางเลือกที่น่าสนใจ</div>
+    <div class="alt-grid">
+      <div class="alt-card">
+        <div class="alt-icon">🇬🇧</div>
+        <div class="alt-title">UK — Chevening / UCL / Imperial</div>
+        <div class="alt-desc">Chevening Scholarship (รัฐบาลอังกฤษ) สำหรับ Master's · UCL / Imperial College / Edinburgh มี BME ชั้นนำ · สมัคร ส.ค.–พ.ย. ทุกปี</div>
+        <div class="alt-pros">✅ Chevening ครอบทุกค่าใช้จ่าย · ชื่อ Imperial / UCL ดังมาก</div>
+        <div class="alt-cons">⚠️ ต้องทำงาน 2 ปีก่อนสมัคร Chevening · Bachelor's = ค่าเทอมแพง £25k+/ปี</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🇦🇺</div>
+        <div class="alt-title">ออสเตรเลีย — ANU / Melbourne</div>
+        <div class="alt-desc">Australia Awards Scholarship (ทุนรัฐบาลออสเตรเลีย) · ANU / U Melbourne / UNSW มี BME ดี · ใกล้ไทยกว่ายุโรป / อเมริกา</div>
+        <div class="alt-pros">✅ Australia Awards ครอบค่าเทอม + ค่าครองชีพ · ได้ PR ง่ายหลังเรียน</div>
+        <div class="alt-cons">⚠️ ค่าครองชีพสูงมาก ~A$25k/ปี · ต้องกลับไทยหลังจบ (Australia Awards)</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🏥</div>
+        <div class="alt-title">Research Internship ระหว่างเรียน</div>
+        <div class="alt-desc">สมัคร UROP / Research Exchange ที่มหิดล-ต่างประเทศ เช่น OIST (ญี่ปุ่น), RIKEN, KAIST Exchange Program, NTU Singapore ช่วง Summer ปี 2–3</div>
+        <div class="alt-pros">✅ เสริม CV มาก · ทำให้สมัครทุนได้ง่ายขึ้น · อาจได้ Letter of Support จาก Prof</div>
+        <div class="alt-cons">⚠️ ต้องหาเอง · GPA ต้องดีพอ (3.5+)</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🇸🇬</div>
+        <div class="alt-title">สิงคโปร์ — NUS / NTU</div>
+        <div class="alt-desc">NUS Biomedical Engineering หรือ NTU BME · มีทุน ASEAN Scholarship · ใกล้ไทยมาก · ภาษาอังกฤษ · Standard ระดับโลก</div>
+        <div class="alt-pros">✅ อันดับโลกสูง · ใกล้ไทย · ภาษาอังกฤษ 100% · อาหารคุ้นเคย</div>
+        <div class="alt-cons">⚠️ แข่งสูงมาก · ค่าครองชีพแพง</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🇹🇼</div>
+        <div class="alt-title">ไต้หวัน — NTU / NTHU</div>
+        <div class="alt-desc">MOE Taiwan Scholarship (ทุนกระทรวงศึกษา ไต้หวัน) · NTU / NTHU มี BME ชั้นนำ · ค่าครองชีพถูก · Apply ทุก ก.พ.–เม.ย.</div>
+        <div class="alt-pros">✅ ทุน MOE ครอบค่าเทอม + NT$15,000/เดือน · ค่าครองชีพถูกกว่าญี่ปุ่น/เกาหลี · ไม่ต้องสอบภาษาจีน (โปรแกรมอังกฤษ)</div>
+        <div class="alt-cons">⚠️ Status ของ degree ไม่ดังเท่าญี่ปุ่น/เกาหลี</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🏛️</div>
+        <div class="alt-title">OCSC / กระทรวงวิทยาศาสตร์ ไทย</div>
+        <div class="alt-desc">ทุนรัฐบาลไทย (ก.พ.ร. / OCSC / วช.) ส่งไปเรียน BME ต่างประเทศ · มักเปิดสำหรับ Master's/PhD · ต้องทำงานในหน่วยงานรัฐหลังจบ</div>
+        <div class="alt-pros">✅ ทุนเต็มจำนวน · รัฐบาลไทยสนับสนุน</div>
+        <div class="alt-cons">⚠️ ผูกมัดทำงานรัฐ 2 เท่าของระยะเวลาทุน · มักต้องมีประสบการณ์ทำงานก่อน</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🔄</div>
+        <div class="alt-title">Gap Year + Reapply</div>
+        <div class="alt-desc">ถ้าปี 1–2 ไม่ได้ทุน: ลาพักการศึกษา 1 ปี (ICT มหิดลอนุญาต) เพื่อเตรียมตัวสมัครทุนรอบถัดไปอย่างจริงจัง</div>
+        <div class="alt-pros">✅ มีเวลาเตรียมตัวเต็มที่ · ไม่ต้องลาออก · กลับมาเรียน ICT ต่อได้</div>
+        <div class="alt-cons">⚠️ เสียเวลา 1 ปี · ต้องขออนุมัติจาก ICT ก่อน</div>
+      </div>
+      <div class="alt-card">
+        <div class="alt-icon">🤝</div>
+        <div class="alt-title">Double Degree Program ICT + ต่างประเทศ</div>
+        <div class="alt-desc">ICT มหิดลมี MOU กับมหาวิทยาลัยต่างประเทศ บางแห่งมีโปรแกรม 2+2 หรือ Exchange ที่อาจนำไปสู่ double degree ได้ เช็กกับ International Affairs ICT</div>
+        <div class="alt-pros">✅ ได้ 2 ปริญญาในเวลาน้อยลง · ยังอยู่ระบบ ICT อย่างเป็นทางการ</div>
+        <div class="alt-cons">⚠️ ไม่ใช่ทุกคณะที่มีโปรแกรมนี้ · ต้องตรวจสอบกับ ICT โดยตรง</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ทุนที่ยังไม่ได้พูดถึง</div>
+    <table class="uni-table">
+      <tr><th>ทุน</th><th>ประเทศ</th><th>ระดับ</th><th>Deadline ทั่วไป</th></tr>
+      <tr><td>Chevening Scholarship</td><td>🇬🇧 UK</td><td>Master's</td><td>ส.ค.–พ.ย. ทุกปี</td></tr>
+      <tr><td>Australia Awards</td><td>🇦🇺 Australia</td><td>Master's/PhD</td><td>เม.ย.–มิ.ย.</td></tr>
+      <tr><td>MOE Taiwan Scholarship</td><td>🇹🇼 Taiwan</td><td>ป.ตรี + Master's</td><td>ก.พ.–เม.ย.</td></tr>
+      <tr><td>ASEAN Scholarship</td><td>🇸🇬 Singapore</td><td>ป.ตรี</td><td>ก.พ.–มี.ค.</td></tr>
+      <tr><td>DAAD Scholarship</td><td>🇩🇪 Germany</td><td>ป.ตรี + Master's</td><td>ต.ค.–พ.ย.</td></tr>
+      <tr><td>OIST Research Internship</td><td>🇯🇵 Japan (Okinawa)</td><td>Intern (Summer)</td><td>ธ.ค.–ม.ค.</td></tr>
+      <tr><td>RIKEN Internship</td><td>🇯🇵 Japan</td><td>Intern</td><td>ต.ค.–พ.ย.</td></tr>
+      <tr><td>Mahidol Int'l Exchange</td><td>ต่างๆ</td><td>Exchange 1 semester</td><td>ต.ค. (Spring) / เม.ย. (Fall)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     COMPARE
+════════════════════════════════════════════ -->
+<div id="page-compare" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">⚖️ เปรียบเทียบทุกตัวเลือก</h2>
+  <p style="color:var(--text2);margin-bottom:1.5rem;">ประเมินแต่ละ path ตาม 6 มิติ: เร็ว / ง่าย / คุ้มค่า / ปลอดภัย / ชื่อเสียง / อิสระ</div>
+
+  <div class="section">
+    <div class="section-title">ตาราง Summary</div>
+    <table class="uni-table">
+      <tr><th>Path</th><th>เวลา (ปี)</th><th>ค่าใช้จ่าย</th><th>โอกาสสำเร็จ</th><th>Degree ที่ได้</th><th>แนะนำ</th></tr>
+      <tr><td>🇰🇷 KAIST Early</td><td>4 ปี</td><td>ต่ำมาก (ทุน)</td><td>ปานกลาง</td><td>B.Eng BME KAIST</td><td>⭐⭐⭐⭐⭐ เร็วที่สุด!</td></tr>
+      <tr><td>🇯🇵 MEXT</td><td>5–6 ปี</td><td>ฟรี</td><td>ปานกลาง</td><td>B.Eng BME Japan</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td>🇰🇷 GKS</td><td>5 ปี</td><td>ฟรี</td><td>ปานกลาง</td><td>B.Eng BME Korea</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>🇩🇪 เยอรมนี</td><td>3–4 ปี</td><td>ต่ำมาก (~€300/ภาค)</td><td>ดี (ถ้า IELTS ผ่าน)</td><td>B.Eng BME Germany</td><td>⭐⭐⭐⭐⭐</td></tr>
+      <tr><td>🇹🇭 BME ไทย (TCAS)</td><td>4 ปี</td><td>ปานกลาง</td><td>ดี (ถ้า A-Level ผ่าน)</td><td>B.Eng BME Thailand</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>🇸🇬 NUS/NTU</td><td>4 ปี</td><td>ปานกลาง–สูง</td><td>ยาก</td><td>B.Eng BME Singapore</td><td>⭐⭐⭐⭐</td></tr>
+      <tr><td>🇹🇼 Taiwan MOE</td><td>4 ปี</td><td>ต่ำ</td><td>ดี</td><td>B.Eng BME Taiwan</td><td>⭐⭐⭐</td></tr>
+      <tr><td>🇺🇸 USA</td><td>4 ปี</td><td>สูงมาก (ถ้าไม่ได้ทุน)</td><td>ยากมาก (Full Aid)</td><td>B.S. BME USA</td><td>⭐⭐⭐ (ถ้าได้ Full Aid)</td></tr>
+      <tr><td>🎓 ICT ก่อน + Master's</td><td>6–7 ปี</td><td>ต่ำ–ปานกลาง</td><td>ดีมาก</td><td>B.Sc. ICT + M.Sc. BME</td><td>⭐⭐⭐⭐⭐ ปลอดภัยสุด</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">คะแนนแต่ละมิติ (1–10)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">KAIST (เกาหลี)</div>
+        <div class="compare-bar">
+          <div class="compare-row"><span class="compare-label">ความเร็ว</span><div class="compare-track"><div class="compare-fill" style="width:95%;background:var(--kr);"></div></div><span class="compare-score" style="color:var(--kr)">9.5</span></div>
+          <div class="compare-row"><span class="compare-label">ความง่าย</span><div class="compare-track"><div class="compare-fill" style="width:60%;background:var(--kr);"></div></div><span class="compare-score" style="color:var(--kr)">6.0</span></div>
+          <div class="compare-row"><span class="compare-label">คุ้มค่า</span><div class="compare-track"><div class="compare-fill" style="width:90%;background:var(--kr);"></div></div><span class="compare-score" style="color:var(--kr)">9.0</span></div>
+          <div class="compare-row"><span class="compare-label">ชื่อเสียง</span><div class="compare-track"><div class="compare-fill" style="width:90%;background:var(--kr);"></div></div><span class="compare-score" style="color:var(--kr)">9.0</span></div>
+          <div class="compare-row"><span class="compare-label">ปลอดภัย</span><div class="compare-track"><div class="compare-fill" style="width:65%;background:var(--kr);"></div></div><span class="compare-score" style="color:var(--kr)">6.5</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">MEXT ญี่ปุ่น</div>
+        <div class="compare-bar">
+          <div class="compare-row"><span class="compare-label">ความเร็ว</span><div class="compare-track"><div class="compare-fill" style="width:55%;background:var(--jp);"></div></div><span class="compare-score" style="color:var(--jp)">5.5</span></div>
+          <div class="compare-row"><span class="compare-label">ความง่าย</span><div class="compare-track"><div class="compare-fill" style="width:55%;background:var(--jp);"></div></div><span class="compare-score" style="color:var(--jp)">5.5</span></div>
+          <div class="compare-row"><span class="compare-label">คุ้มค่า</span><div class="compare-track"><div class="compare-fill" style="width:95%;background:var(--jp);"></div></div><span class="compare-score" style="color:var(--jp)">9.5</span></div>
+          <div class="compare-row"><span class="compare-label">ชื่อเสียง</span><div class="compare-track"><div class="compare-fill" style="width:92%;background:var(--jp);"></div></div><span class="compare-score" style="color:var(--jp)">9.2</span></div>
+          <div class="compare-row"><span class="compare-label">ปลอดภัย</span><div class="compare-track"><div class="compare-fill" style="width:80%;background:var(--jp);"></div></div><span class="compare-score" style="color:var(--jp)">8.0</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">ยุโรป (เยอรมนี)</div>
+        <div class="compare-bar">
+          <div class="compare-row"><span class="compare-label">ความเร็ว</span><div class="compare-track"><div class="compare-fill" style="width:70%;background:var(--eu);"></div></div><span class="compare-score" style="color:var(--eu)">7.0</span></div>
+          <div class="compare-row"><span class="compare-label">ความง่าย</span><div class="compare-track"><div class="compare-fill" style="width:65%;background:var(--eu);"></div></div><span class="compare-score" style="color:var(--eu)">6.5</span></div>
+          <div class="compare-row"><span class="compare-label">คุ้มค่า</span><div class="compare-track"><div class="compare-fill" style="width:98%;background:var(--eu);"></div></div><span class="compare-score" style="color:var(--eu)">9.8</span></div>
+          <div class="compare-row"><span class="compare-label">ชื่อเสียง</span><div class="compare-track"><div class="compare-fill" style="width:88%;background:var(--eu);"></div></div><span class="compare-score" style="color:var(--eu)">8.8</span></div>
+          <div class="compare-row"><span class="compare-label">ปลอดภัย</span><div class="compare-track"><div class="compare-fill" style="width:70%;background:var(--eu);"></div></div><span class="compare-score" style="color:var(--eu)">7.0</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">เคส 3: ICT + Master's BME</div>
+        <div class="compare-bar">
+          <div class="compare-row"><span class="compare-label">ความเร็ว</span><div class="compare-track"><div class="compare-fill" style="width:30%;background:var(--accent);"></div></div><span class="compare-score" style="color:var(--accent)">3.0</span></div>
+          <div class="compare-row"><span class="compare-label">ความง่าย</span><div class="compare-track"><div class="compare-fill" style="width:90%;background:var(--accent);"></div></div><span class="compare-score" style="color:var(--accent)">9.0</span></div>
+          <div class="compare-row"><span class="compare-label">คุ้มค่า</span><div class="compare-track"><div class="compare-fill" style="width:85%;background:var(--accent);"></div></div><span class="compare-score" style="color:var(--accent)">8.5</span></div>
+          <div class="compare-row"><span class="compare-label">ชื่อเสียง</span><div class="compare-track"><div class="compare-fill" style="width:85%;background:var(--accent);"></div></div><span class="compare-score" style="color:var(--accent)">8.5</span></div>
+          <div class="compare-row"><span class="compare-label">ปลอดภัย</span><div class="compare-track"><div class="compare-fill" style="width:98%;background:var(--accent);"></div></div><span class="compare-score" style="color:var(--accent)">9.8</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">คำแนะนำสุดท้าย</div>
+    <div class="note">
+      <strong>กลยุทธ์ที่ดีที่สุด:</strong> ทำหลาย track พร้อมกัน อย่าเลือกแค่อย่างเดียว<br><br>
+      <strong>ระยะสั้น (ปี 1 ICT):</strong> สมัคร KAIST Early (ก.ย.–ต.ค. 2569) + เตรียม IELTS + เตรียม A-Level สำหรับ TCAS70<br><br>
+      <strong>ระยะกลาง (ปี 2 ICT):</strong> ถ้าไม่ได้ KAIST → สมัคร GKS + MEXT + ยุโรป พร้อมกันในปี 2<br><br>
+      <strong>Backup ที่สุด:</strong> A-Level + TCAS → BME มหิดล/จุฬา ซึ่งยังดีกว่าอยู่ ICT โดยไม่มีแผน<br><br>
+      <strong>ถ้าไม่ได้อะไรเลย:</strong> เรียน ICT ให้จบ GPA ดี → ต่อ Master's BME ต่างประเทศ ซึ่งง่ายกว่ามาก + Double Degree มีค่ามากในตลาดงาน Digital Health
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     AFTER BME — Career & Further Study Routes
+════════════════════════════════════════════ -->
+<div id="page-afterbme" class="page">
+  <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">🚀 หลังจบ BME — เส้นทางที่ใช้ BME + IT ร่วมกัน</h2>
+  <p style="color:var(--text2);margin-bottom:0.75rem;">ทุก Case ด้านล่างต้องการ combination ของ <strong style="color:var(--accent);">Biomedical Engineering + IT/CS/AI</strong> — สิ่งที่คนส่วนใหญ่ไม่มีทั้งคู่</p>
+
+  <div class="note" style="border-color:rgba(245,158,66,0.4);background:rgba(245,158,66,0.07);margin-bottom:2rem;">
+    <strong style="color:#f59e42;">⚡ ทำไม BME + IT ถึงมีเพดานสูงมาก?</strong><br>
+    วิศวกร BME ส่วนใหญ่ code ไม่เป็น · นักพัฒนา AI ส่วนใหญ่ไม่รู้ Physiology · คนที่ <em>cross</em> ได้ทั้งสองฝั่งนั้นหายากมาก และเป็นสิ่งที่ทุก sector กำลังตามหา: Medical AI · BCI · Surgical Robotics · Drug Discovery AI · Digital Health · Regulatory Tech
+  </div>
+
+  <!-- CASE SELECTOR -->
+  <div class="country-bar" id="afterbme-bar" style="margin-bottom:1.5rem;">
+    <button class="country-btn active" data-ab="ai" onclick="showAfterBME('ai')" style="border-color:rgba(56,189,248,0.5);color:#38bdf8;background:rgba(56,189,248,0.1);">🤖 Medical AI</button>
+    <button class="country-btn" data-ab="neuro" onclick="showAfterBME('neuro')">🧠 Neurotech / BCI</button>
+    <button class="country-btn" data-ab="robot" onclick="showAfterBME('robot')">🦾 Medical Robotics</button>
+    <button class="country-btn" data-ab="bio" onclick="showAfterBME('bio')">🧬 Bioinformatics / Drug AI</button>
+    <button class="country-btn" data-ab="imaging" onclick="showAfterBME('imaging')">🔬 Medical Imaging AI</button>
+    <button class="country-btn" data-ab="healthit" onclick="showAfterBME('healthit')">🏥 Digital Health / HIT</button>
+    <button class="country-btn" data-ab="startup" onclick="showAfterBME('startup')">🚀 Startup / Entrepreneur</button>
+    <button class="country-btn" data-ab="phd" onclick="showAfterBME('phd')">🎓 PhD → Academia</button>
+  </div>
+
+  <!-- ── CASE: MEDICAL AI ── -->
+  <div id="ab-ai" class="cpanel active">
+    <div style="background:var(--bg2);border:1px solid rgba(56,189,248,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:#38bdf8;margin-bottom:4px;">🤖 Case 1 — Medical AI Engineer / Researcher</div>
+      <div style="font-size:13px;color:var(--text2);">ใช้ IT (ML/Deep Learning) + BME (Signal, Physiology, Imaging) สร้าง AI ที่ช่วยวินิจฉัยโรค ทำนายผู้ป่วย และช่วยตัดสินใจทางคลินิก</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">Deep Learning · Model training (PyTorch/TensorFlow) · MLOps · Data pipeline · Cloud deployment (AWS/GCP)</div></div>
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">เข้าใจ Clinical data · ECG/EEG waveform · Medical image format (DICOM) · Regulatory knowledge (FDA SaMD) · ไม่เอา AI ไปใช้ผิด</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program ที่แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Program</th><th>มหาวิทยาลัย / ทุน</th><th>ระยะเวลา</th></tr>
+      <tr><td>🇹🇼</td><td>M.S. CS / AI with Medical focus</td><td><a class="ext" href="https://www.cs.nthu.edu.tw/en/" target="_blank">NTHU</a> · <a class="ext" href="https://www.sinica.edu.tw/en" target="_blank">Academia Sinica</a> · MOE Scholarship</td><td>2 ปี</td></tr>
+      <tr><td>🇨🇳</td><td>M.S. AI / Intelligent Medicine</td><td><a class="ext" href="https://iiis.tsinghua.edu.cn/en/" target="_blank">Tsinghua IIIS</a> · <a class="ext" href="https://en.sjtu.edu.cn/" target="_blank">SJTU AI Institute</a> · CSC</td><td>2–3 ปี</td></tr>
+      <tr><td>🇰🇷</td><td>M.S./PhD AI + Healthcare</td><td><a class="ext" href="https://gsai.kaist.ac.kr/" target="_blank">KAIST AI</a> · <a class="ext" href="https://ai.postech.ac.kr/" target="_blank">POSTECH AI</a> · GKS Graduate</td><td>2–4 ปี</td></tr>
+      <tr><td>🇸🇬</td><td>M.S. Biomedical AI</td><td><a class="ext" href="https://www.a-star.edu.sg/" target="_blank">A*STAR Fellowship</a> · NUS Medicine+CS</td><td>2 ปี</td></tr>
+      <tr><td>🇯🇵</td><td>PhD Biomedical AI</td><td><a class="ext" href="https://www.riken.jp/en/" target="_blank">RIKEN Center AI</a> · <a class="ext" href="https://www.naist.jp/en/" target="_blank">NAIST</a> · MEXT Research</td><td>3–5 ปี</td></tr>
+      <tr><td>🇺🇸🇩🇪</td><td>PhD Biomedical Engineering AI</td><td>MIT CSAIL · Stanford BME · ETH Zurich · Johns Hopkins</td><td>4–5 ปี</td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งานที่ทำได้</div>
+    <table class="uni-table">
+      <tr><th>Role</th><th>บริษัท</th><th>Salary (USD)</th></tr>
+      <tr><td>Medical AI Research Engineer</td><td>Google Health · DeepMind · Microsoft Health</td><td>$100–180k+</td></tr>
+      <tr><td>AI Software Engineer (SaMD)</td><td>Medtronic · Siemens Healthineers · Philips</td><td>$80–130k</td></tr>
+      <tr><td>Healthcare AI Engineer (ไทย)</td><td>BDMS · Bumrungrad · Mahidol AI lab</td><td>฿80–150k/เดือน</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: NEUROTECH ── -->
+  <div id="ab-neuro" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(176,123,232,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:var(--th);margin-bottom:4px;">🧠 Case 2 — Neurotechnology / Brain-Computer Interface (BCI)</div>
+      <div style="font-size:13px;color:var(--text2);">ใช้ BME (Neuroscience, EEG/Neural recording) + IT (Signal Processing AI, Real-time systems) พัฒนา interface ระหว่างสมองกับคอมพิวเตอร์ — สาขาที่ Elon Musk (Neuralink) กำลังขับเคลื่อน</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">Neural signal recording · Electrode design · Brain anatomy · EEG/ECoG/fMRI analysis · Biocompatibility</div></div>
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">Real-time DSP · Embedded firmware · ML classification (BCI decoder) · Low-latency systems · Wireless protocol</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program / Labs แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Program / Lab</th><th>Links</th></tr>
+      <tr><td>🇺🇸</td><td>PhD Neural Engineering · BCI Lab</td><td><a class="ext" href="https://www.bme.jhu.edu/" target="_blank">Johns Hopkins BCI Lab</a> · <a class="ext" href="https://neuroeng.washington.edu/" target="_blank">UW Neural Engineering</a></td></tr>
+      <tr><td>🇨🇭</td><td>M.S./PhD Neuroengineering</td><td><a class="ext" href="https://www.epfl.ch/schools/sv/research/neuroscience/" target="_blank">EPFL NeuroX</a> · ETH Zurich Neuro</td></tr>
+      <tr><td>🇰🇷</td><td>M.S. Brain Engineering</td><td><a class="ext" href="https://bee.kaist.ac.kr/" target="_blank">KAIST Bio & Brain Eng.</a> — สาขาตรงมาก</td></tr>
+      <tr><td>🇯🇵</td><td>PhD Neural Systems</td><td><a class="ext" href="https://www.riken.jp/en/research/labs/cbs/" target="_blank">RIKEN CBS (Brain Science)</a> · ATR Institute</td></tr>
+      <tr><td>🇸🇬</td><td>Research — Neural Tech</td><td><a class="ext" href="https://www.a-star.edu.sg/ihpc" target="_blank">A*STAR IHPC Neural</a> · NUS Mind & Brain</td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งาน / บริษัทที่ต้องการ profile นี้</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">Neuralink</div><div class="alt-desc">Brain-computer implant startup ของ Elon Musk · ต้องการ Neural Eng. + Embedded AI อย่างมาก</div><div class="alt-pros">✅ เงินเดือน + equity สูงมาก</div></div>
+      <div class="alt-card"><div class="alt-title">Medtronic Neuro</div><div class="alt-desc">Deep Brain Stimulation (DBS), Spinal cord stimulator · ผลิตภัณฑ์ BCI ทางการแพทย์จริง</div><div class="alt-pros">✅ Stable · FDA-cleared product</div></div>
+      <div class="alt-card"><div class="alt-title">BCI Startup ตัวเอง</div><div class="alt-desc">Non-invasive EEG-based BCI สำหรับ Rehabilitation · Mental health monitoring · ตลาดกำลังโต</div><div class="alt-pros">✅ ASEAN ยังไม่มีใครทำจริงจัง</div></div>
+    </div></div>
+  </div>
+
+  <!-- ── CASE: ROBOTICS ── -->
+  <div id="ab-robot" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(245,158,66,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:#f59e42;margin-bottom:4px;">🦾 Case 3 — Medical Robotics / Surgical AI</div>
+      <div style="font-size:13px;color:var(--text2);">พัฒนา Robot ช่วยผ่าตัด หุ่นยนต์ฟื้นฟู (Rehab Robot) หรือ Prosthetics อัจฉริยะ — ต้องรู้ทั้ง Mechanics, Electronics, Bio และ AI</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">Human anatomy · Haptics / force feedback · Prosthetics design · EMG control · Safety standards สำหรับ medical robot</div></div>
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">Robot Operating System (ROS) · Computer vision · Path planning · Real-time control algorithm · AI-assisted surgery</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Program</th><th>มหาวิทยาลัย</th></tr>
+      <tr><td>🇺🇸</td><td>M.S./PhD Robotics + Medical</td><td><a class="ext" href="https://www.ri.cmu.edu/" target="_blank">CMU Robotics Institute</a> · JHU LCSR Surgical Robotics</td></tr>
+      <tr><td>🇨🇭</td><td>M.S. Robotics Systems</td><td><a class="ext" href="https://rsl.ethz.ch/" target="_blank">ETH Zurich RSL</a> · EPFL Robotics</td></tr>
+      <tr><td>🇰🇷</td><td>M.S. Robotics / Mechatronics</td><td>KAIST Robotics · POSTECH Mech.</td></tr>
+      <tr><td>🇯🇵</td><td>M.S./PhD Medical Robotics</td><td>Osaka U · Tohoku U Robotics Lab · Waseda</td></tr>
+      <tr><td>🇸🇬</td><td>M.S. Robotics / Biomedical</td><td><a class="ext" href="https://www.a-star.edu.sg/sris" target="_blank">A*STAR SRIS</a> · NTU Robotics</td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งาน / Product</div>
+    <table class="uni-table">
+      <tr><th>Role / บริษัท</th><th>หมายเหตุ</th></tr>
+      <tr><td>Intuitive Surgical (da Vinci Robot)</td><td>ผู้นำ Surgical Robot ระดับโลก · $100–150k+ salary</td></tr>
+      <tr><td>Boston Dynamics / SoftBank Robotics</td><td>Rehabilitation & Assistive Robot</td></tr>
+      <tr><td>Össur / Ottobock (Prosthetics AI)</td><td>Smart prosthetic limb + AI control · เติบโตมากในเอเชีย</td></tr>
+      <tr><td>Startup หุ่นยนต์ฟื้นฟู ไทย/ASEAN</td><td>ไทยขาดแคลน Rehab Robot มาก · โอกาสสูง</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: BIOINFORMATICS ── -->
+  <div id="ab-bio" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(76,175,128,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:#4caf80;margin-bottom:4px;">🧬 Case 4 — Bioinformatics / Computational Biology / AI Drug Discovery</div>
+      <div style="font-size:13px;color:var(--text2);">ใช้ IT (Algorithms, Big Data, ML) + BME (Genomics, Proteomics, Biology) วิเคราะห์ข้อมูลชีวภาพขนาดใหญ่ ค้นหายาใหม่ด้วย AI — ตลาด $20B+ และกำลังระเบิด</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">DNA/RNA/Protein structure · CRISPR basics · Cell biology · Drug mechanism · Clinical trial understanding</div></div>
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">Python/R Bioinformatics · Graph Neural Network · Molecular docking simulation · Big Data pipeline (Genomics data = TB+ per patient)</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Program</th><th>มหาวิทยาลัย</th></tr>
+      <tr><td>🇹🇼</td><td>M.S./PhD Bioinformatics</td><td><a class="ext" href="https://www.bime.ntu.edu.tw/en/" target="_blank">NTU BIME</a> · <a class="ext" href="https://www.ibms.sinica.edu.tw/en/" target="_blank">Academia Sinica IBMS</a> · MOE</td></tr>
+      <tr><td>🇨🇳</td><td>M.S. Computational Biology</td><td>Tsinghua School of Life · PKU Bioinformatics · CSC</td></tr>
+      <tr><td>🇺🇸</td><td>M.S./PhD Bioinformatics</td><td>MIT Computational Biology · UCSD Bioinformatics · Stanford</td></tr>
+      <tr><td>🇬🇧</td><td>M.S. Bioinformatics</td><td><a class="ext" href="https://www.ebi.ac.uk/" target="_blank">EMBL-EBI Cambridge</a> · Edinburgh</td></tr>
+      <tr><td>🇸🇬</td><td>Research Bioinformatics</td><td><a class="ext" href="https://www.a-star.edu.sg/gis" target="_blank">A*STAR GIS (Genome Institute)</a></td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งาน / Industry</div>
+    <table class="uni-table">
+      <tr><th>บริษัท / Role</th><th>Salary</th><th>หมายเหตุ</th></tr>
+      <tr><td>Insilico Medicine (AI Drug Discovery)</td><td>$80–130k</td><td>ใช้ AI ออกแบบยาใหม่ · ฮ่องกง/USA</td></tr>
+      <tr><td>BioNTech / Moderna (Genomics AI)</td><td>$90–140k</td><td>mRNA platform · Genomics pipeline</td></tr>
+      <tr><td>NVIDIA Clara Parabricks</td><td>$100k+</td><td>GPU-accelerated genomics pipeline</td></tr>
+      <tr><td>Pharma (Roche/Novartis/AstraZeneca)</td><td>$70–120k</td><td>Computational Chemistry / Drug AI</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: IMAGING ── -->
+  <div id="ab-imaging" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(91,164,207,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:var(--us);margin-bottom:4px;">🔬 Case 5 — Medical Imaging AI / Computer Vision in Medicine</div>
+      <div style="font-size:13px;color:var(--text2);">สาขาที่ใหญ่ที่สุดใน Medical AI ตอนนี้ — AI อ่านภาพ X-ray/CT/MRI แทนหรือช่วยแพทย์ ตรวจมะเร็ง โรคตา โรคปอด ได้แม่นกว่ามนุษย์</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">DICOM format · MRI/CT physics · Image artifact · Radiomics · Clinical annotation standard · FDA 510(k) SaMD</div></div>
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">CNN / Vision Transformer · nnU-Net segmentation · MONAI framework · DICOM pipeline (pydicom) · Model explainability (Grad-CAM)</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Program / Lab</th><th>Link</th></tr>
+      <tr><td>🇩🇪</td><td>M.S. Medical Imaging</td><td><a class="ext" href="https://www.dkfz.de/en/" target="_blank">DKFZ Heidelberg</a> · TU Munich CAMP Lab</td></tr>
+      <tr><td>🇳🇱</td><td>M.S. Medical Image Analysis</td><td><a class="ext" href="https://www.diagnijmegen.nl/" target="_blank">Radboud DIAG</a> · TU/e Medical Imaging</td></tr>
+      <tr><td>🇰🇷</td><td>M.S./PhD Biomedical Imaging AI</td><td>KAIST BME Imaging Lab · SNU Medical AI</td></tr>
+      <tr><td>🇨🇳</td><td>M.S. Medical Imaging AI</td><td>SJTU Medical Image Analysis · Zhejiang U</td></tr>
+      <tr><td>🇺🇸</td><td>PhD Biomedical Imaging</td><td>Stanford RADxAI · Mayo Clinic AI · NIH</td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งาน / บริษัท</div>
+    <table class="uni-table">
+      <tr><th>Role / บริษัท</th><th>Salary</th><th>หมายเหตุ</th></tr>
+      <tr><td>Viz.ai / Aidoc / Zebra Medical</td><td>$90–140k</td><td>AI radiology startup · FDA approved product</td></tr>
+      <tr><td>Siemens Healthineers / Philips Healthcare</td><td>$80–120k</td><td>CT/MRI AI embedded software</td></tr>
+      <tr><td>Google Health (LYNA, Eye AI)</td><td>$120–180k+</td><td>World-leading medical imaging research</td></tr>
+      <tr><td>Thai hospital AI startup</td><td>฿60–120k/เดือน</td><td>ไทยเริ่ม deploy AI Radiology แล้ว · ขาดคน</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: DIGITAL HEALTH / HIT ── -->
+  <div id="ab-healthit" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(163,230,53,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:#a3e635;margin-bottom:4px;">🏥 Case 6 — Digital Health / Health Information Technology (HIT)</div>
+      <div style="font-size:13px;color:var(--text2);">ออกแบบและสร้างระบบ IT สำหรับโรงพยาบาล — EHR (Electronic Health Record), Telemedicine Platform, Hospital Information System, IoT Monitoring — ต้องรู้ทั้ง clinical workflow และ software engineering</div>
+    </div>
+    <div class="section"><div class="section-title">ทำไมต้องมีทั้ง BME + IT</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">BME ให้อะไร</div><div class="alt-desc">Clinical workflow · HL7/FHIR standard · Medical terminology · Patient safety · Healthcare regulation (HIPAA/PDPA)</div></div>
+      <div class="alt-card"><div class="alt-title">IT ให้อะไร</div><div class="alt-desc">System architecture · API design · Cloud (AWS/Azure Health) · Mobile app · Cybersecurity for healthcare · Interoperability</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>Program</th><th>ที่ไหน</th><th>หมายเหตุ</th></tr>
+      <tr><td>M.S. Health Informatics / Biomedical Informatics</td><td><a class="ext" href="https://dbmi.hms.harvard.edu/" target="_blank">Harvard DBMI</a> · Oregon Health & Science U</td><td>เน้น EHR + Clinical AI</td></tr>
+      <tr><td>M.S. Digital Health</td><td>Imperial College London · TU Berlin</td><td>Business + Tech + Clinical สมดุล</td></tr>
+      <tr><td>M.B.A. + Health Tech</td><td>Wharton / MIT Sloan Healthcare</td><td>เส้นทางเป็น CTO / CEO HealthTech</td></tr>
+      <tr><td>M.S. eHealth / Telemedicine</td><td>KTH Sweden · Karolinska + KTH</td><td>SI Scholarship · เน้น Nordic model</td></tr>
+      <tr><td>หลักสูตรไทย — M.S. Medical Informatics</td><td>มหิดล EGBE / จุฬา / NECTEC</td><td>ทำงานภาครัฐ/โรงพยาบาลไทยได้ทันที</td></tr>
+    </table></div>
+    <div class="section"><div class="section-title">งาน</div>
+    <table class="uni-table">
+      <tr><th>Role</th><th>บริษัท / สถาบัน</th><th>Salary</th></tr>
+      <tr><td>Healthcare IT Architect</td><td>Epic Systems · Cerner (Oracle Health)</td><td>$80–130k</td></tr>
+      <tr><td>FHIR/HL7 Integration Specialist</td><td>โรงพยาบาลขนาดใหญ่ทั่วโลก</td><td>$70–110k</td></tr>
+      <tr><td>Digital Health Product Manager</td><td>Health Tech startup / Telemedicine</td><td>$90–140k</td></tr>
+      <tr><td>Medical IT Consultant (ไทย)</td><td>BDMS IT · กระทรวงสาธารณสุข · NECTEC</td><td>฿60–120k/เดือน</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: STARTUP ── -->
+  <div id="ab-startup" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(245,158,66,0.3);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:#f59e42;margin-bottom:4px;">🚀 Case 7 — Health Tech Startup / Entrepreneur</div>
+      <div style="font-size:13px;color:var(--text2);">ใช้ ICT + BME สร้างผลิตภัณฑ์ที่คนคนเดียวทำได้เพราะรู้ทั้งสองด้าน — เส้นทาง high-risk แต่ potential ไม่มีเพดาน</div>
+    </div>
+    <div class="section"><div class="section-title">Product Ideas ที่ต้องการ BME + IT สูง</div>
+    <div class="alt-grid">
+      <div class="alt-card"><div class="alt-title">🧠 Medical AI SaaS</div><div class="alt-desc">AI อ่าน X-ray / ECG / Dermatology · ขาย subscription ให้โรงพยาบาล/คลินิก · ARR $1–10M ได้</div><div class="alt-pros">✅ ICT build · BME validate clinically · ไทย = ตลาดยังเปิด</div></div>
+      <div class="alt-card"><div class="alt-title">⌚ Wearable Health Platform</div><div class="alt-desc">Continuous Health Monitor ใส่ข้อมือ/แผ่นแปะผิวหนัง · Sensor (BME) + App + Cloud AI (ICT)</div><div class="alt-pros">✅ Hardware + Software = barrier to entry สูง</div></div>
+      <div class="alt-card"><div class="alt-title">💊 AI Drug Discovery Tool</div><div class="alt-desc">Tool ช่วย Pharma screen compound ด้วย ML · B2B SaaS · มูลค่าสูงมาก</div><div class="alt-pros">✅ ต้องรู้ Chemistry (BME) + ML (ICT)</div></div>
+      <div class="alt-card"><div class="alt-title">🏃 Rehab + BCI App</div><div class="alt-desc">EEG-based neurofeedback สำหรับ Stroke rehab หรือ ADHD · ตลาด underserved ใน ASEAN</div><div class="alt-pros">✅ ASEAN ยังไม่มีใครทำจริงจัง</div></div>
+      <div class="alt-card"><div class="alt-title">🌐 Digital Twin Hospital</div><div class="alt-desc">จำลอง operation ของโรงพยาบาลดิจิทัลเพื่อ optimize resource · simulation AI</div><div class="alt-pros">✅ IT-heavy แต่ต้องรู้ clinical process (BME)</div></div>
+      <div class="alt-card"><div class="alt-title">🔬 Telemedicine AI Platform</div><div class="alt-desc">Video consult + AI Triage + EHR · ตลาด ASEAN โตเร็วมากหลัง COVID</div><div class="alt-pros">✅ Combine all: BME + ICT + Business</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Ecosystem / Funding ที่แนะนำ</div>
+    <table class="uni-table">
+      <tr><th>ประเทศ</th><th>Ecosystem</th><th>Grant / Fund</th></tr>
+      <tr><td>🇸🇬 สิงคโปร์</td><td><a class="ext" href="https://www.a-star.edu.sg/" target="_blank">A*STAR</a> · SGInnovate · NUS Enterprise</td><td>SGD 250k–1M SGTech grant</td></tr>
+      <tr><td>🇹🇼 ไต้หวัน</td><td>NTHU Innovation Hub · Academia Sinica spinoff</td><td>MOEA SBIR · NTD 5M+ R&D grant</td></tr>
+      <tr><td>🇰🇷 เกาหลี</td><td>KAIST Startup · POSTECH Innovation</td><td>TIPS program · K-Startup</td></tr>
+      <tr><td>🇹🇭 ไทย</td><td>BDMS Kickstart · NIA · NECTEC Startup</td><td>NIA grant ฿500k–5M · BOI HealthTech</td></tr>
+    </table></div>
+  </div>
+
+  <!-- ── CASE: PHD ── -->
+  <div id="ab-phd" class="cpanel">
+    <div style="background:var(--bg2);border:1px solid rgba(124,111,247,0.25);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:16px;font-weight:700;color:var(--accent);margin-bottom:4px;">🎓 Case 8 — PhD → Professor / PI / Researcher</div>
+      <div style="font-size:13px;color:var(--text2);">เส้นทาง Academic ระยะยาว · ตั้ง Lab ตัวเองได้ · มีชื่อเสียงระดับชาติ-นานาชาติ · ทำ research ในสิ่งที่คนอื่นทำไม่ได้</div>
+    </div>
+    <div class="section"><div class="section-title">เส้นทาง</div>
+    <div class="timeline">
+      <div class="tl-item hot"><div class="tl-date">หลังจบ BME (ปีที่ 0)</div><div class="tl-title">สมัคร PhD Biomedical Engineering / AI</div><div class="tl-detail">เลือก Lab ที่ทำ research ตรงกับ interest · ติดต่อ Professor ล่วงหน้า 6–12 เดือน · GPA ≥ 3.5 + Research paper จะช่วยมาก</div></div>
+      <div class="tl-item"><div class="tl-date">ปีที่ 1–4 (PhD)</div><div class="tl-title">PhD Research + TA + Publish Papers</div><div class="tl-detail">ทุน PhD มักครอบ: ค่าเทอม + $20–35k/ปี stipend (USA) หรือ ¥144k/ปี (MEXT Research) · ไม่ต้องจ่ายเอง</div></div>
+      <div class="tl-item"><div class="tl-date">ปีที่ 5–6 (Postdoc)</div><div class="tl-title">Postdoctoral Fellow (ถ้าต้องการ)</div><div class="tl-detail">$50–70k/ปี · เก็บ publication เพิ่ม · Build network · สมัคร Faculty position</div></div>
+      <div class="tl-item hot"><div class="tl-date">ปีที่ 6–8</div><div class="tl-title">เป็น Assistant Professor / PI</div><div class="tl-detail">ไทย: มหิดล / จุฬา / VISTEC / KMUTT · ต่างประเทศ: NTU Singapore / KAIST / Taiwan Uni · เงินเดือน + ทุน วช./สวรส./NSTDA</div></div>
+    </div></div>
+    <div class="section"><div class="section-title">Program PhD ที่ให้ทุนเต็ม (Fully Funded)</div>
+    <table class="uni-table">
+      <tr><th>ที่</th><th>Program</th><th>ทุน</th><th>Stipend</th></tr>
+      <tr><td>🇺🇸 USA</td><td>PhD Biomedical Engineering / CS</td><td>NSF / NIH Fellowship · RA/TA</td><td>$25–35k/ปี</td></tr>
+      <tr><td>🇯🇵 Japan</td><td>PhD BME / Biomedical AI</td><td>MEXT Research Scholarship</td><td>¥144,000/เดือน</td></tr>
+      <tr><td>🇰🇷 Korea</td><td>PhD Bio & Brain Eng. (KAIST)</td><td>GKS Graduate Full</td><td>₩900,000/เดือน</td></tr>
+      <tr><td>🇨🇭 ETH Zurich</td><td>PhD Bioengineering / Robotics</td><td>ETH Fellowship</td><td>CHF 50k+/ปี</td></tr>
+      <tr><td>🇸🇬 Singapore</td><td>PhD Biomedical Engineering</td><td>NUS/NTU Research Scholarship</td><td>SGD 2,500/เดือน</td></tr>
+      <tr><td>🇹🇼 Taiwan</td><td>PhD BME / Bioinformatics</td><td>MOE Scholarship + Research Grant</td><td>NT$15,000/เดือน + lab stipend</td></tr>
+    </table></div>
+    <div class="note success-note">🏛️ <strong>กลับไทยหลัง PhD:</strong> ไทยขาด researcher สาย Biomedical AI มากมาย · รัฐบาลไทยมีโครงการ NSTDA Chair Professor, VISTEC, Thailand Science Park ดึงดูดนักวิจัยกลับ · เงินเดือน Professor + ทุนวิจัย + consulting รวมกัน ≥ ฿200k/เดือน</div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section" style="margin-top:2rem;">
+    <div class="section-title">เปรียบเทียบ 8 Cases หลังจบ BME</div>
+    <table class="uni-table">
+      <tr><th>Case</th><th>เวลาเพิ่ม</th><th>Earning Potential</th><th>ความเสี่ยง</th><th>IT ที่ใช้</th><th>BME ที่ใช้</th></tr>
+      <tr><td>🤖 1 Medical AI</td><td>2–5 ปี</td><td>$80–200k+</td><td>ต่ำ</td><td>ML/DL, Python</td><td>Clinical data, EHR</td></tr>
+      <tr><td>🧠 2 Neurotech/BCI</td><td>3–5 ปี</td><td>$100–200k+</td><td>ปานกลาง</td><td>DSP, Embedded AI</td><td>Neural signal, EEG</td></tr>
+      <tr><td>🦾 3 Medical Robotics</td><td>2–4 ปี</td><td>$90–160k</td><td>ต่ำ</td><td>ROS, CV, Control</td><td>Anatomy, Haptics</td></tr>
+      <tr><td>🧬 4 Bioinformatics</td><td>2–5 ปี</td><td>$80–150k</td><td>ต่ำ</td><td>Python/R, Graph ML</td><td>Genomics, Cell Bio</td></tr>
+      <tr><td>🔬 5 Medical Imaging AI</td><td>2–4 ปี</td><td>$90–180k+</td><td>ต่ำ</td><td>Vision AI, DICOM</td><td>Radiology, Physics</td></tr>
+      <tr><td>🏥 6 Digital Health/HIT</td><td>1–2 ปี</td><td>$70–130k</td><td>ต่ำมาก</td><td>Systems, API, Cloud</td><td>Clinical workflow</td></tr>
+      <tr><td>🚀 7 Startup</td><td>0–2 ปี</td><td>Unlimited</td><td>สูง</td><td>Full-stack</td><td>Product validation</td></tr>
+      <tr><td>🎓 8 PhD → Academia</td><td>5–8 ปี</td><td>฿150–300k+/เดือน</td><td>ต่ำ (ได้ทุน)</td><td>Research coding</td><td>Deep domain expertise</td></tr>
+    </table>
+  </div>
+
+  <div class="note success-note">
+    <strong>Big Picture:</strong> ทุก Case ที่มีเพดานสูงล้วนต้องการคนที่ <strong>พูดภาษา Engineering และ Biology ได้ในคนเดียว</strong> · ICT (DST) ให้ฐาน IT ที่แน่น · BME เปิดประตูสู่ Medical domain · combination ของสองอย่างนี้คือ <em>rare T-shaped profile</em> ที่ตลาด Healthcare AI ทั่วโลกกำลังตามหาในอีก 10–20 ปีข้างหน้า
+  </div>
+</div>
+
+<footer>
+  สร้างสำหรับ Nunthawat · DST ICT Mahidol 2569 · ข้อมูลอ้างอิงจาก <a class="ext" href="https://www.mytcas.com/" target="_blank">mytcas.com</a> · <a class="ext" href="https://admission.kaist.ac.kr/intl-undergraduate/" target="_blank">admission.kaist.ac.kr</a> · <a class="ext" href="https://www.th.emb-japan.go.jp/" target="_blank">th.emb-japan.go.jp</a> · <a class="ext" href="https://www.studyinkorea.go.kr/" target="_blank">studyinkorea.go.kr</a> · อัปเดต มิ.ย. 2569
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showCountry(c) {
+  document.querySelectorAll('#page-case1 .cpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('cp-' + c).classList.add('active');
+  document.querySelector('[data-c="' + c + '"]').classList.add('active');
+}
+function showAfterBME(id) {
+  document.querySelectorAll('#page-afterbme .cpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('[data-ab]').forEach(b => {
+    b.classList.remove('active');
+    b.style.borderColor = '';
+    b.style.color = '';
+    b.style.background = '';
+  });
+  document.getElementById('ab-' + id).classList.add('active');
+  const btn = document.querySelector('[data-ab="' + id + '"]');
+  btn.classList.add('active');
+  btn.style.borderColor = 'var(--accent)';
+  btn.style.color = 'var(--accent)';
+  btn.style.background = 'rgba(124,111,247,0.12)';
+}
+</script>
+</body>
+</html>
